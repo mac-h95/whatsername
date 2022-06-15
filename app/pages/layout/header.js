@@ -7,7 +7,7 @@ import Navigation from './navigation';
 
 const Header = ({ logo, route }) => {
   const [visible, setVisible] = useState(false);
-  console.log(visible);
+
   return (
     <header className="flex items-center justify-between w-screen px-4 py-2 md:px-10">
       <Link href="/">
