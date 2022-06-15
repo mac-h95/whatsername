@@ -5,7 +5,7 @@
 @layer base {
   html,
   body {
-    @apply font-sans bg-background-500 text-foreground-500 overflow-x-hidden uppercase max-w-screen-sm;
+    @apply font-sans bg-background-500 text-foreground-500 overflow-x-hidden uppercase;
   }
 }
 

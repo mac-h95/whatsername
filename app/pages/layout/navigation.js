@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 const Item = ({ href, name, route }) => {
   if (href === '/contact') {
@@ -43,42 +42,20 @@ const NavigationItems = [
   { href: '/contact', name: 'Contact' }
 ];
 
-const Navigation = ({ route, visible, setVisible }) => {
-  const [width, setWidth] = useState();
-
-  useEffect(() => {
-    setWidth(window.innerWidth);
-
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
-
-  return (
-    <nav
-      className={`absolute top-0 right-0 z-10 h-screen transition-all duration-500 ease-in-out shadow-sm md:static md:h-auto md:shadow-none md:bg-transparent bg-background-800 md:w-auto ${
-        visible ? 'w-2/5' : 'w-0'
-      }`}
+const Navigation = ({ route, setVisible }) => (
+  <nav className="absolute top-0 right-0 z-10 w-2/5 h-screen transition-all duration-500 ease-in-out shadow-sm md:static md:h-auto md:shadow-none md:bg-transparent bg-background-800 md:w-auto">
+    <span
+      className="absolute top-0 right-0 mr-3 text-4xl mt-7 md:hidden hover:cursor-pointer"
+      onClick={() => setVisible(false)}
     >
-      <span
-        className={`absolute top-0 right-0 mr-3 text-4xl mt-7 md:hidden hover:cursor-pointer ${
-          visible ? 'block' : 'hidden'
-        }`}
-        onClick={() => setVisible(false)}
-      >
-        &times;
-      </span>
-      <ul className="flex flex-col px-5 pt-16 space-y-2 text-lg md:space-x-4 md:space-y-0 md:items-center md:flex-row">
-        {NavigationItems.map(({ href, name }) => (
-          <Item key={href} href={href} name={name} route={route} />
-        ))}
-      </ul>
-    </nav>
-  );
-};
+      &times;
+    </span>
+    <ul className="flex flex-col px-5 pt-16 space-y-2 text-lg md:space-x-4 md:space-y-0 md:items-center md:flex-row">
+      {NavigationItems.map(({ href, name }) => (
+        <Item key={href} href={href} name={name} route={route} />
+      ))}
+    </ul>
+  </nav>
+);
 
 export default Navigation;
