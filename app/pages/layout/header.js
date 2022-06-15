@@ -22,7 +22,7 @@ const Header = ({ logo, route }) => {
   });
 
   return (
-    <header className="flex items-center justify-between w-screen px-6 py-2 mb-10 md:px-10">
+    <header className="flex items-center justify-between w-screen px-6 py-2 mb-10 md:py-6 md:px-10 ">
       <Link href="/">
         <a>
           <Image
@@ -38,7 +38,12 @@ const Header = ({ logo, route }) => {
       </a>
       {width > 768 && <Navigation route={route} setVisible={setVisible} />}
       {width < 768 && (
-        <Navigation route={route} visible={visible} setVisible={setVisible} />
+        <Navigation
+          route={route}
+          visible={visible}
+          setVisible={setVisible}
+          nounderline
+        />
       )}
     </header>
   );

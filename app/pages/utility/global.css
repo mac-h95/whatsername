@@ -38,4 +38,8 @@
       @apply bg-transparent border-none;
     }
   }
+
+  .flex-list {
+    @apply flex flex-col items-center justify-center space-y-12 md:flex-row md:space-y-0 md:space-x-12;
+  }
 }

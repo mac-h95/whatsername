@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Footer = ({ logo, socialMedia }) => (
-  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 space-y-4">
+  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 mt-6 space-y-4">
     <div className="flex flex-col items-center justify-center md:flex-row md:items-center md:justify-between md:w-screen md:px-10">
       <Link href="/">
         <a>
@@ -18,9 +18,11 @@ const Footer = ({ logo, socialMedia }) => (
       </Link>
       <nav className="flex items-center justify-center text-2xl md:mr-4 md:space-x-2">
         {socialMedia.map(({ url, name, icon }) => (
-          <a href={url} key={name} target="_blank" rel="noopener">
-            <Icon name={icon.name} provider={icon.provider} />
-          </a>
+          <Link href={url}>
+            <a key={name} target="_blank" rel="noopener">
+              <Icon name={icon.name} provider={icon.provider} />
+            </a>
+          </Link>
         ))}
       </nav>
     </div>
