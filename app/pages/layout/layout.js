@@ -13,7 +13,7 @@ const Layout = ({ children, siteSettings }) => {
     <CartProvider>
       <Head page={page} {...siteSettings} />
       <Header logo={siteSettings.favicon} route={route} />
-      <main className="flex flex-col flex-1">{children}</main>
+      <main className="flex flex-col flex-1 min-h-screen">{children}</main>
       <Footer
         logo={siteSettings.favicon}
         socialMedia={siteSettings.socialMedia}
