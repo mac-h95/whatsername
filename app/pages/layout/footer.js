@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Footer = ({ logo, socialMedia }) => (
-  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 space-y-4 ">
+  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 space-y-4">
     <div className="flex flex-col items-center justify-center md:flex-row md:items-center md:justify-between md:w-screen md:px-10">
       <Link href="/">
         <a>

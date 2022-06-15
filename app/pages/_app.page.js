@@ -2,14 +2,20 @@ import '@fontsource/poppins';
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 import Layout from 'layout';
+import { useRouter } from 'next/router';
 import sanity from 'sanity';
 import './utility/global.css';
 
-const MyApp = ({ Component, pageProps, siteSettings }) => (
-  <Layout siteSettings={siteSettings}>
-    <Component {...pageProps} />
-  </Layout>
-);
+const MyApp = ({ Component, pageProps, siteSettings, ...appProps }) => {
+  const router = useRouter();
+  if (router.pathname === '/') return <Component {...pageProps} />;
+
+  return (
+    <Layout siteSettings={siteSettings}>
+      <Component {...pageProps} />
+    </Layout>
+  );
+};
 
 export default MyApp;
 

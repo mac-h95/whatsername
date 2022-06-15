@@ -19,14 +19,14 @@
 @layer components {
   button,
   .button {
-    @apply py-1 px-3 bg-transparent border-foreground-500 border-2 transition-colors duration-200 ease-in-out;
+    @apply py-1 px-3 bg-transparent border-foreground-500 border-2 transition-colors duration-200 ease-in-out cursor-pointer;
     &:hover,
     &:focus {
       @apply bg-primary-500 border-primary-500 text-background-500 transition-colors duration-200 ease-in-out;
     }
-    &:primary {
+    &.primary {
       @apply bg-primary-500 text-background-500;
-      &:hero {
+      &.hero {
         @apply px-1;
       }
     }
