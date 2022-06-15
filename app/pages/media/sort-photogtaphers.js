@@ -1,5 +1,5 @@
 export default (images) => {
-  const clickies = images.map((image) => image.photographer);
+  const clickies = images.map(({ photographer }) => photographer);
   let newArr = [];
   let uniObj = [];
 

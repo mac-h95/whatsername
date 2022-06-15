@@ -8,8 +8,10 @@ const sanity = sanityClient({
   apiVersion: 'v2021-10-21'
 });
 
+const builder = imageUrlBuilder(sanity);
+
 export function urlFor(source) {
-  return imageUrlBuilder.image(sanity, source);
+  return builder.image(source).url();
 }
 
 export default sanity;

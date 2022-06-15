@@ -2,5 +2,9 @@ module.exports = {
   swcMinify: true,
   pageExtensions: ['page.js'],
   reactStrictMode: true,
-  images: {formats: ['image/avif', 'image/webp']}
-}
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    domains: ['cdn.sanity.io'],
+    optimize: true
+  }
+};

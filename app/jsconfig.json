@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "layout": ["./pages/layout/layout"],
       "sanity": ["./pages/utility/sanity"],
       "commerce": ["./pages/shop/commerce"],
       "icon": ["./pages/utility/icon"],

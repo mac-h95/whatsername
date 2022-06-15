@@ -5,20 +5,23 @@
 @layer base {
   html,
   body {
-    @apply font-sans bg-background text-foreground overflow-x-hidden uppercase;
+    @apply font-sans bg-background-500 text-foreground-500 overflow-x-hidden uppercase;
   }
 }
 
 @layer components {
   button,
   .button {
-    @apply py-1 px-3 bg-transparent border-foreground border-2 transition-colors duration-200 ease-in-out;
+    @apply py-1 px-3 bg-transparent border-foreground-500 border-2 transition-colors duration-200 ease-in-out;
     &:hover,
     &:focus {
-      @apply bg-primary text-background transition-colors duration-200 ease-in-out;
+      @apply bg-primary-500 border-primary-500 text-background-500 transition-colors duration-200 ease-in-out;
     }
     &:primary {
-      @apply bg-primary text-background;
+      @apply bg-primary-500 text-background-500;
+      &:hero {
+        @apply px-1;
+      }
     }
     &:ghost {
       @apply bg-transparent border-none;

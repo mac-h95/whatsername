@@ -23,7 +23,7 @@ export async function postPathFetch() {
   }`
   );
 
-  return posts.map((post) => ({
+  return posts.map(({ slug }) => ({
     params: { slug: post.slug.current }
   }));
 }
