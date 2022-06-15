@@ -5,6 +5,23 @@
 @layer base {
   html,
   body {
-    @apply font-sans bg-background text-foreground;
+    @apply font-sans bg-background text-foreground overflow-x-hidden uppercase;
+  }
+}
+
+@layer components {
+  button,
+  .button {
+    @apply py-1 px-3 bg-transparent border-foreground border-2 transition-colors duration-200 ease-in-out;
+    &:hover,
+    &:focus {
+      @apply bg-primary text-background transition-colors duration-200 ease-in-out;
+    }
+    &:primary {
+      @apply bg-primary text-background;
+    }
+    &:ghost {
+      @apply bg-transparent border-none;
+    }
   }
 }

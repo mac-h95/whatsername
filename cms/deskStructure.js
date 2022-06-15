@@ -1,5 +1,4 @@
-import S from "@sanity/desk-tool/structure-builder";
-import SeoPane from "sanity-plugin-seo-pane";
+import S from '@sanity/desk-tool/structure-builder'
 
 import {
   BiCalendarEvent,
@@ -8,152 +7,152 @@ import {
   BiCog,
   BiEnvelope,
   BiGroup,
-  BiKey,
   BiHome,
   BiInfoCircle,
+  BiKey,
   BiMovie,
   BiNews,
   BiNotepad,
   BiPhotoAlbum
-} from "react-icons/bi";
+} from 'react-icons/bi'
 
 export default () =>
   S.list()
-    .title("Content")
+    .title('Content')
     .items([
       S.listItem()
-        .title("Site Settings")
+        .title('Site Settings')
         .icon(BiCog)
         .child(
-          S.document().schemaType("siteSettings").documentId("siteSettings")
+          S.document().schemaType('siteSettings').documentId('siteSettings')
         ),
       S.listItem()
-        .title("Home Page")
+        .title('Home Page')
         .icon(BiHome)
-        .child(S.document().schemaType("homePage").documentId("homePage")),
+        .child(S.document().schemaType('homePage').documentId('homePage')),
       S.listItem()
-        .title("About")
+        .title('About')
         .icon(BiInfoCircle)
         .child(
           S.list()
-            .title("About")
+            .title('About')
             .items([
               S.listItem()
-                .title("Page Info")
+                .title('Page Info')
                 .icon(BiNotepad)
-                .schemaType("aboutPage")
+                .schemaType('aboutPage')
                 .child(
-                  S.document().schemaType("aboutPage").documentId("aboutPage")
+                  S.document().schemaType('aboutPage').documentId('aboutPage')
                 ),
               S.listItem()
-                .title("Team Members")
+                .title('Team Members')
                 .icon(BiGroup)
-                .schemaType("member")
-                .child(S.documentTypeList("member").title("Team Members")),
+                .schemaType('member')
+                .child(S.documentTypeList('member').title('Team Members')),
               S.listItem()
-                .title("Call to Action")
+                .title('Call to Action')
                 .icon(BiMovie)
-                .schemaType("cta")
-                .child(S.document().schemaType("cta").documentId("cta"))
+                .schemaType('cta')
+                .child(S.document().schemaType('cta').documentId('cta'))
             ])
         ),
       S.listItem()
-        .title("Events")
+        .title('Events')
         .icon(BiCalendarEvent)
         .child(
           S.list()
-            .title("Events")
+            .title('Events')
             .items([
               S.listItem()
-                .title("Page Info")
+                .title('Page Info')
                 .icon(BiNotepad)
-                .schemaType("eventsPage")
+                .schemaType('eventsPage')
                 .child(
-                  S.document().schemaType("eventsPage").documentId("eventsPage")
+                  S.document().schemaType('eventsPage').documentId('eventsPage')
                 ),
               S.listItem()
-                .title("Events")
+                .title('Events')
                 .icon(BiCalendarEvent)
-                .schemaType("event")
-                .child(S.documentTypeList("event").title("Events"))
+                .schemaType('event')
+                .child(S.documentTypeList('event').title('Events'))
             ])
         ),
       S.listItem()
-        .title("Media")
+        .title('Media')
         .icon(BiCamera)
         .child(
           S.list()
-            .title("Media")
+            .title('Media')
             .items([
               S.listItem()
-                .title("Page Info")
+                .title('Page Info')
                 .icon(BiNotepad)
                 .child(
-                  S.document().schemaType("mediaPage").documentId("mediaPage")
+                  S.document().schemaType('mediaPage').documentId('mediaPage')
                 ),
               S.listItem()
-                .title("Photo Albums")
+                .title('Photo Albums')
                 .icon(BiPhotoAlbum)
-                .schemaType("album")
-                .child(S.documentTypeList("album").title("Photo Albums"))
+                .schemaType('album')
+                .child(S.documentTypeList('album').title('Photo Albums'))
             ])
         ),
       S.listItem()
-        .title("Blog")
+        .title('Blog')
         .icon(BiNews)
         .child(
           S.list()
-            .title("Blog")
+            .title('Blog')
             .items([
               S.listItem()
-                .title("Page Info")
+                .title('Page Info')
                 .icon(BiNotepad)
                 .child(
-                  S.document().schemaType("blogPage").documentId("blogPage")
+                  S.document().schemaType('blogPage').documentId('blogPage')
                 ),
               S.listItem()
-                .title("Blog Posts")
+                .title('Blog Posts')
                 .icon(BiNews)
-                .schemaType("post")
-                .child(S.documentTypeList("post").title("Blog Posts"))
+                .schemaType('post')
+                .child(S.documentTypeList('post').title('Blog Posts'))
             ])
         ),
       S.listItem()
-        .title("Shop")
+        .title('Shop')
         .icon(BiCartAlt)
-        .child(S.document().schemaType("shopPage").documentId("shopPage")),
+        .child(S.document().schemaType('shopPage').documentId('shopPage')),
       S.listItem()
-        .title("Contact")
+        .title('Contact')
         .icon(BiEnvelope)
         .child(
-          S.document().schemaType("contactPage").documentId("contactPage")
+          S.document().schemaType('contactPage').documentId('contactPage')
         ),
       S.listItem()
-        .title("Keywords")
+        .title('Keywords')
         .icon(BiKey)
-        .schemaType("keyword")
-        .child(S.documentTypeList("keyword").title("Keywords")),
+        .schemaType('keyword')
+        .child(S.documentTypeList('keyword').title('Keywords')),
       ...S.documentTypeListItems().filter(
         (listItem) =>
           ![
-            "siteSettings",
-            "homePage",
-            "aboutPage",
-            "member",
-            "cta",
-            "event",
-            "eventsPage",
-            "keyword",
-            "link",
-            "mediaPage",
-            "album",
-            "blogPage",
-            "post",
-            "shopPage",
-            "contactPage",
-            "photographer",
-            "albumImage",
-            "venue"
+            'siteSettings',
+            'homePage',
+            'aboutPage',
+            'member',
+            'cta',
+            'event',
+            'eventsPage',
+            'keyword',
+            'link',
+            'mediaPage',
+            'album',
+            'blogPage',
+            'post',
+            'shopPage',
+            'contactPage',
+            'photographer',
+            'photo',
+            'venue'
           ].includes(listItem.getId())
       )
-    ]);
+    ])
