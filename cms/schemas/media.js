@@ -71,7 +71,7 @@ const album = {
       type: "array",
       of: [
         {
-          type: "albumImage"
+          type: "photo"
         }
       ]
     }

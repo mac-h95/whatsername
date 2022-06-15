@@ -1,3 +1,6 @@
-const MyApp = ({ Component, pageProps }) => (<Component {...pageProps} />)
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/800.css'
 
-export default MyApp;
+const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />
+
+export default MyApp
