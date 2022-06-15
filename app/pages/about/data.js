@@ -18,7 +18,9 @@ export async function aboutPageFetch() {
         subheading,
         subheading2,
         buttonText,
-        buttonLink
+        buttonLink->{
+          url
+        }
       }
     }
   `);

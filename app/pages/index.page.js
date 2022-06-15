@@ -26,9 +26,7 @@ const Home = ({ pageData, siteSettings }) => {
       <Header logo={siteSettings.favicon} route={route} />
       <main className="min-h-[90vh] ">
         <div className="z-10 flex flex-col justify-start space-y-8 pb-52">
-          <h1 className="text-4xl md:text-6xl font-bold text-center tracking-[.4rem]">
-            {pageData.heading}
-          </h1>
+          <h1>{pageData.heading}</h1>
           <Link href="/about">
             <button className="mx-auto primary hero">Find Out More</button>
           </Link>
