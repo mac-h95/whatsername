@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Footer = ({ logo, socialMedia }) => (
-  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2">
+  <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 space-y-4">
     <div className="flex flex-col items-center justify-center md:">
       <Link href="/">
         <a>
@@ -24,7 +24,17 @@ const Footer = ({ logo, socialMedia }) => (
         ))}
       </nav>
     </div>
-    <span></span>
+    <small>
+      ©{' '}
+      <Link href="/">
+        <a className="underline">Whatsername</a>
+      </Link>{' '}
+      {new Date().getFullYear()}, Developed by ©
+      <Link href="https://adaptstudio.co.uk">
+        <a className="underline">adapt</a>
+      </Link>
+      .
+    </small>
   </footer>
 );
 

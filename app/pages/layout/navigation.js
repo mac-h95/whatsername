@@ -42,10 +42,15 @@ const NavigationItems = [
   { href: '/contact', name: 'Contact' }
 ];
 
-const Navigation = ({ route, setVisible }) => (
-  <nav className="absolute top-0 right-0 z-10 w-2/5 h-screen transition-all duration-500 ease-in-out shadow-sm md:static md:h-auto md:shadow-none md:bg-transparent bg-background-800 md:w-auto">
+const Navigation = ({ route, visible, setVisible }) => (
+  <nav
+    className={`absolute top-0 right-0 z-10 w-2/5 h-screen shadow-sm md:static md:h-auto md:shadow-none md:bg-transparent bg-background-800 md:w-auto
+  ${visible ? 'w-2/5' : 'w-0'} transition-all duration-500 ease-in-out`}
+  >
     <span
-      className="absolute top-0 right-0 mr-3 text-4xl mt-7 md:hidden hover:cursor-pointer"
+      className={`absolute top-0 right-0 mr-3 text-4xl mt-7 md:hidden hover:cursor-pointer ${
+        visible ? 'block' : 'hidden'
+      }`}
       onClick={() => setVisible(false)}
     >
       &times;

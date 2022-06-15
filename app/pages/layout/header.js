@@ -6,10 +6,7 @@ import { urlFor } from 'sanity';
 import Navigation from './navigation';
 
 const Header = ({ logo, route }) => {
-<<<<<<< HEAD
   const [visible, setVisible] = useState(false);
-=======
-  const [visibile, setVisible] = useState(false);
   const [width, setWidth] = useState();
 
   useEffect(() => {
@@ -23,10 +20,9 @@ const Header = ({ logo, route }) => {
       window.removeEventListener('resize', handleResize);
     };
   });
->>>>>>> parent of 4b9fe77 (sliding animation for menu done)
 
   return (
-    <header className="flex items-center justify-between w-screen px-10 py-2">
+    <header className="flex items-center justify-between w-screen px-6 py-2 md:px-10">
       <Link href="/">
         <a>
           <Image
@@ -37,12 +33,12 @@ const Header = ({ logo, route }) => {
           />
         </a>
       </Link>
-      <a className="text-3xl md:hidden" onClick={() => setVisible(!visibile)}>
+      <a className="text-3xl md:hidden" onClick={() => setVisible(!visible)}>
         <Icon name="HiMenuAlt3" provider="hi" />
       </a>
       {width > 768 && <Navigation route={route} setVisible={setVisible} />}
-      {width < 768 && visibile && (
-        <Navigation route={route} setVisible={setVisible} />
+      {width < 768 && (
+        <Navigation route={route} visible={visible} setVisible={setVisible} />
       )}
     </header>
   );
