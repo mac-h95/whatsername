@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+:root {
+  /* Brand colors */
+  --brand-primary: #ffdefb;
+  --brand-primary--inverted: #002104;
+  --brand-secondary: #fdfdfd;
+  --brand-secondary--inverted: #1c181b;
+  --font-family-sans-serif: 'Poppins';
+}
