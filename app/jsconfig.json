@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "sanity": ["./pages/utility/sanity"],
+      "commerce": ["./pages/shop/commerce"],
+      "icon": ["./pages/utility/icon"],
+      "date": ["./pages/utility/date"],
+      "heading": ["./pages/utility/heading"]
+    }
+  }
+}

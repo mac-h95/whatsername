@@ -1,8 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chec/commerce.js': ^2.8.0
   '@fontsource/poppins': ^4.5.8
   '@portabletext/react': ^1.0.6
+  '@sanity/client': ^3.3.2
+  '@sanity/image-url': ^1.0.1
   '@tailwindcss/forms': ^0.5.2
   '@tailwindcss/typography': ^0.5.2
   autoprefixer: ^10.4.7
@@ -14,7 +17,10 @@ specifiers:
   tailwindcss: ^3.1.3
 
 dependencies:
+  '@chec/commerce.js': 2.8.0
   '@portabletext/react': 1.0.6_react@18.2.0
+  '@sanity/client': 3.3.2
+  '@sanity/image-url': 1.0.1
   next: 12.1.6_biqbaboplfbrettd7655fr4n2y
   next-sanity: 0.5.2_react@18.2.0
   react: 18.2.0
@@ -29,6 +35,22 @@ devDependencies:
   tailwindcss: 3.1.3
 
 packages:
+
+  /@babel/runtime/7.18.3:
+    resolution: {integrity: sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.9
+    dev: false
+
+  /@chec/commerce.js/2.8.0:
+    resolution: {integrity: sha512-OPBphT/hU33iDp52zzYOqz/oSXLhEuhGVUg2UNvYtmBW4eCNmtsM0dqW0+wu+6K0d6fZojurCBdVQMKb2R7l3g==}
+    dependencies:
+      '@babel/runtime': 7.18.3
+      axios: 0.21.4
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /@fontsource/poppins/4.5.8:
     resolution: {integrity: sha512-HE9yLDxYJEcxooVrYvvEhtyxaYU32hQIx1+npKegVefceE0l0zi0ePqKWWxYxkFpyy6WuZSQ+9rai3INnYKEJA==}
@@ -234,6 +256,11 @@ packages:
       - supports-color
     dev: false
 
+  /@sanity/image-url/1.0.1:
+    resolution: {integrity: sha512-AdKQ3zMk7WdoNwoJPrAvQhW+kUtBldBX0nHtnGy+rwmgsCQ0rAXasrgH43Fhmsp/yB6piiq+F2d5qEuBFsdQVg==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
   /@sanity/timed-out/4.0.2:
     resolution: {integrity: sha512-NBDKGj14g9Z+bopIvZcQKWCzJq5JSrdmzRR1CS+iyA3Gm8SnIWBfZa7I3mTg2X6Nu8LQXG0EPKXdOGozLS4i3w==}
     engines: {node: '>=0.10.0'}
@@ -332,6 +359,14 @@ packages:
       postcss: 8.4.14
       postcss-value-parser: 4.2.0
     dev: true
+
+  /axios/0.21.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.15.1_debug@2.6.9
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -1006,6 +1041,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /regenerator-runtime/0.13.9:
+    resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
+    dev: false
 
   /requires-port/1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
