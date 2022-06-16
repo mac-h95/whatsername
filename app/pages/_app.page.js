@@ -6,9 +6,10 @@ import { useRouter } from 'next/router';
 import sanity from 'sanity';
 import './utility/global.css';
 
-const MyApp = ({ Component, pageProps, siteSettings, ...appProps }) => {
+const MyApp = ({ Component, pageProps, siteSettings }) => {
   const router = useRouter();
-  if (router.pathname === '/') return <Component {...pageProps} />;
+  if (router.pathname === '/' || router.pathname === '/media/albums/[slug]')
+    return <Component {...pageProps} />;
 
   return (
     <Layout siteSettings={siteSettings}>

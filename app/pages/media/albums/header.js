@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Header = ({ title, seo, cover, artist, venue, date }) => (
-  <div className="grid w-screen min-h-screen place-items-center">
+  <>
     <NextHead>
       <title>{`${artist} at ${venue} - ${date}`}</title>
       <meta name="title" content={`${artist} at ${venue.name} - ${date}`} />
@@ -17,17 +17,25 @@ const Header = ({ title, seo, cover, artist, venue, date }) => (
       <meta name="og:keywords" content={seo.keywords}></meta>
       <meta name="og:image" content={urlFor(seo.image)}></meta>
     </NextHead>
-    <Image src={urlFor(cover)} alt={artist} layout="fill"></Image>
-    <div className="z-50 flex flex-col items-center pb-64 ">
-      <h1 className="tracking-widest text-8xl">{artist}</h1>
-      <span className="mt-4 mb-8">{`${venue.name}, ${getFullDateString(
-        date
-      )}`}</span>
-      <Link href="#photos">
-        <button className="px-12 py-1">Open</button>
-      </Link>
+    <div className="grid w-screen min-h-screen place-items-center ">
+      <Image
+        src={urlFor(cover)}
+        alt={artist}
+        layout="fill"
+        objectFit="cover"
+        style={{ marginTop: '-1rem' }}
+      />
+      <div className="z-40 flex flex-col items-center pb-64 ">
+        <h1 className="font-bold tracking-widest md:text-8xl">{artist}</h1>
+        <span className="mt-4 mb-8">{`${venue.name}, ${getFullDateString(
+          date
+        )}`}</span>
+        <Link href="#photos">
+          <button className="px-12 py-1">Open</button>
+        </Link>
+      </div>
     </div>
-  </div>
+  </>
 );
 
 export default Header;

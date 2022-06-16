@@ -4,7 +4,7 @@ module.exports = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['cdn.sanity.io'],
+    domains: ['cdn.sanity.io', 'cdn.chec.io'],
     optimize: true
   }
 };

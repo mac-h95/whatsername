@@ -19,13 +19,14 @@ export default function Photos({ images }) {
               <Icon name="FiCamera" provider="fi" />
               <span>{photographer.name}</span>
             </a>
-            <div className="sm:masonry-sm md:masonry-md masonrry">
+            <div className="sm:masonry-sm md:masonry-md masonry">
               {images
                 .filter(
                   (image) => image.photographer.name === photographer.name
                 )
                 .map((image) => (
                   <img
+                    className="mt-2 md:mt-0"
                     key={image.id}
                     src={urlFor(image.image)}
                     alt={image.alt}

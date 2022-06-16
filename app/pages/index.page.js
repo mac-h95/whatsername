@@ -36,7 +36,7 @@ const Home = ({ pageData, siteSettings }) => {
           alt={pageData.heading}
           layout="fill"
           objectFit="cover"
-          style={{ opacity: 0.2, zIndex: 0, position: 'relative' }}
+          style={{ opacity: 0.2, zIndex: 0 }}
         />
       </main>
       <Footer

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { onClickOutside } from 'pages/utility/click';
 import { useRef } from 'react';
 
-const Item = ({ key, href, name, route, nounderline, setVisible }) => {
+const Item = ({ href, name, route, nounderline, setVisible }) => {
   if (href === '/contact') {
     return (
       <>
@@ -58,8 +58,12 @@ const Navigation = ({ route, visible, setVisible, nounderline }) => {
   return (
     <nav
       ref={navRef}
-      className={`absolute top-0 right-0 z-50 w-2/5 h-screen shadow-sm  md:h-auto md:flex md:static items-start md:shadow-none md:bg-transparent bg-background-800 md:w-auto transition-all duration-500 ease-in-out
-        ${visible ? 'w-2/5' : 'w-0'}
+      className={`fixed top-0 right-0 z-50 w-2/5 h-screen shadow-sm  md:h-auto md:flex md:static items-start md:shadow-none md:bg-transparent bg-background-800 md:w-auto transition-all duration-500 ease-in-out
+        ${
+          visible
+            ? 'translate-x-0'
+            : `${nounderline ? 'translate-x-[100%]' : 'translate-x-0'}`
+        }
       `}
     >
       <span
