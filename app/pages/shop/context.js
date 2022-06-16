@@ -4,13 +4,6 @@ import { commerce } from './commerce';
 const CartStateContext = createContext();
 const CartDispatchContext = createContext();
 
-const initialState = {
-  total_items: 0,
-  total_unique_items: 0,
-  total_price: 0,
-  line_items: []
-};
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SET_CART':
@@ -24,7 +17,12 @@ const reducer = (state, action) => {
 };
 
 const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, {
+    subtotal: {
+      raw: 0,
+      formatted_with_symbol: '£0.00'
+    }
+  });
 
   useEffect(() => {
     getCart();

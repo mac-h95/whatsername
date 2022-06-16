@@ -3,6 +3,7 @@ import Heading from 'heading';
 import Image from 'next/image';
 import Link from 'next/link';
 import sanity from 'sanity';
+import ShopNavigation from './shop/checkout/store-navigation';
 
 export const getStaticProps = async () => {
   return {
@@ -14,10 +15,10 @@ export const getStaticProps = async () => {
 };
 
 const Shop = ({ pageData, products }) => {
-  console.log(products);
   return (
     <div>
       <Heading heading={pageData.heading} />
+      <ShopNavigation />
       <ul>
         {products.data.map((product) => (
           <li key={product.permalink}>

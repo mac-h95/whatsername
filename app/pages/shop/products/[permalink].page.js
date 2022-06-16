@@ -3,6 +3,8 @@ import Icon from 'icon';
 import NextHead from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
+import ShopNavigation from '../checkout/store-navigation';
+import { useCartDispatch } from '../context';
 
 export const getStaticPaths = async () => {
   const { data: products } = await commerce.products.list();
@@ -27,8 +29,21 @@ export const getStaticProps = async ({ params }) => ({
 
 const Product = ({ product }) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState({
+    variants: {},
+    extra_fields: {}
+  });
   const images = product.assets.filter((asset) => asset.is_image === true);
+  const { setCart } = useCartDispatch();
+
+  const addToCart = async () =>
+    commerce.cart
+      .add(product.id, quantity)
+      .then(async (cart) => {
+        setCart(cart);
+      })
+      .catch((err) => console.log(err));
 
   return (
     <div>
@@ -43,6 +58,7 @@ const Product = ({ product }) => {
         <meta name="og:keywords" content={product.description}></meta>
         <meta name="og:image" content={product.image.url}></meta>
       </NextHead>
+      <ShopNavigation />
       <div className="flex flex-col w-screen px-6 md:justify-center md:space-x-20 md:px-32 md:flex-row">
         <div className="flex flex-col space-y-4 text-center">
           <h2 className="text-4xl font-bold">{product.name}</h2>
@@ -55,15 +71,18 @@ const Product = ({ product }) => {
             {product.variant_groups.map((variantGroup) => (
               <div key={variantGroup.id} className="flex flex-col space-y-4">
                 <label>{variantGroup.name}</label>
-                <select className="w-1/2 px-4 py-2 mx-auto text-center bg-transparent border-0 border-b-2 border-gray-300 text-foreground-500 placeholder:text-gray-700 focus:outline-none focus:border-primary-500">
-                  onChange=
-                  {(e) =>
+                <select
+                  className="w-1/2 px-4 py-2 mx-auto text-center bg-transparent border-0 border-b-2 border-gray-300 text-foreground-500 placeholder:text-gray-700 focus:outline-none focus:border-primary-500"
+                  onChange={(e) => {
                     setSelectedOptions({
                       ...selectedOptions,
-                      [variantGroup.id]: e.target.value
-                    })
-                  }
-                  >
+                      variants: {
+                        ...selectedOptions.variants,
+                        [variantGroup.name]: e.target.value
+                      }
+                    });
+                  }}
+                >
                   {variantGroup.options.map((variant) => (
                     <option key={variant.id} value={variant.id}>
                       {variant.name}
@@ -80,11 +99,38 @@ const Product = ({ product }) => {
                   type="text"
                   name={extra_field.name}
                   placeholder={extra_field.name}
+                  onChange={(e) => {
+                    setSelectedOptions({
+                      ...selectedOptions,
+                      extra_fields: {
+                        ...selectedOptions.extra_fields,
+                        [extra_field.name]: e.target.value
+                      }
+                    });
+                  }}
                 />
               </div>
             ))}
+            <div className="flex items-center justify-center mx-auto space-x-4">
+              <span
+                onClick={() => setQuantity(quantity >= 1 && quantity - 1)}
+                className="px-4 py-2 rounded-lg cursor-pointer bg-zinc-600 text-foreground-500"
+              >
+                -
+              </span>
+              <span className="text-2xl">{quantity}</span>
+              <span
+                onClick={() => setQuantity(quantity + 1)}
+                className="px-4 py-2 rounded-lg cursor-pointer bg-zinc-600 text-foreground-500"
+              >
+                +
+              </span>
+            </div>
           </div>
-          <button className="flex items-center justify-center py-2 mx-auto space-x-2">
+          <button
+            className="flex items-center justify-center py-2 mx-auto space-x-2"
+            onClick={addToCart}
+          >
             <span className="text-2xl">
               <Icon name="FiShoppingCart" provider="fi" />
             </span>
