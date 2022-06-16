@@ -44,6 +44,7 @@ export async function postPageFetch(slug) {
       author->{
         name,
         link,
+        role,
         image{asset{_ref}}
       }
     }

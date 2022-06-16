@@ -2,6 +2,7 @@ import { getFullDateString } from 'date';
 import Icon from 'icon';
 import NextHead from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Header = ({ title, metadata, cover, date, author }) => (
@@ -17,26 +18,32 @@ const Header = ({ title, metadata, cover, date, author }) => (
       <meta name="og:keywords" content={metadata.description}></meta>
       <meta name="og:image" content={urlFor(metadata.image)}></meta>
     </NextHead>
-    <div>
-      <Image src={urlFor(cover)} alt={title} width={'700px'} height={'400px'} />
+    <div className="relative flex flex-col items-center max-w-sm px-4 mt-8 mb-10 space-y-2 md:px-16 md:max-w-none md:items-start">
+      <Link href="/blog">
+        <a className="absolute left-3 md:-left-2 md:top-0 -top-8 text-primary-500 hover:text-primary-600">
+          <span className="normal-case">&larr; Back</span>
+        </a>
+      </Link>
+      <Image src={urlFor(cover)} alt={title} width={800} height={400} />
       <div>
-        <h1>{title}</h1>
-        <span>
-          <Icon name="FiCalendar" provider="fi" /> {getFullDateString(date)}
-        </span>
-        <span>
-          <Icon name="FiClock" provider="fi" /> 5m
-        </span>
+        <div className="text-center md:text-left">
+          <h2 className="font-bold tracking-wider md:text-4xl">{title}</h2>
+          <div classname="flex items-center justify-between md:items-start">
+            <span className="flex flex-col items-center justify-center max-w-sm mx-0 md:items-start">
+              <span className="flex items-center space-x-1 ">
+                <Icon name="FiCalendar" provider="fi" />
+                <span>{getFullDateString(date)}</span>
+              </span>
+              <span className="flex items-center space-x-1 lowercase">
+                <Icon name="FiClock" provider="fi" />
+                <span>5min</span>
+              </span>
+            </span>
+          </div>
+        </div>
       </div>
-      <a href={author.link} target="_blank" rel="noopener">
-        <Image
-          src={urlFor(author.image)}
-          alt={author.name}
-          width={'70px'}
-          height={'70px'}
-        />
-        <span>{author.name}</span>
-      </a>
     </div>
   </>
 );
+
+export default Header;

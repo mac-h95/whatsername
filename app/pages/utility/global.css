@@ -18,6 +18,21 @@
   h1 {
     @apply text-4xl md:text-6xl font-bold text-center tracking-[.4rem];
   }
+
+  .prose {
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-foreground-500;
+    }
+
+    & blockquote {
+      @apply text-foreground-700;
+    }
+  }
 }
 
 @layer components {

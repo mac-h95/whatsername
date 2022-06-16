@@ -29,7 +29,9 @@ const About = ({ pageData }) => {
   return (
     <>
       <Heading heading={pageData.heading} />
-      <BodyText value={body} />
+      <div className="max-w-[85vw] prose mx-auto normal-case text-foreground-500 md:max-w-prose snap-center">
+        <BodyText value={body} />
+      </div>
       <Members team={founders} founders />
       <Members team={members} />
       <ActionCall {...cta} />
