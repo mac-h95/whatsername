@@ -22,8 +22,8 @@ const Footer = ({ logo, socialMedia }) => (
       </Link>
       <nav className="flex items-center justify-center text-2xl md:mr-4 md:space-x-2">
         {socialMedia.map(({ url, name, icon }) => (
-          <Link href={url}>
-            <a key={name} target="_blank" rel="noopener">
+          <Link key={name} href={url}>
+            <a target="_blank" rel="noopener">
               <Icon name={icon.name} provider={icon.provider} />
             </a>
           </Link>

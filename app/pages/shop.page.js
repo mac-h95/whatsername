@@ -22,7 +22,7 @@ const Shop = ({ pageData, products }) => {
         {products.data.map((product) => (
           <li key={product.permalink}>
             <Link href={`/shop/products/${product.permalink}`}>
-              <a className="flex flex-col items-center text-center">
+              <a className="flex flex-col items-center px-4 text-center md:px-0">
                 <Image
                   src={product.image.url}
                   alt={product.name}
