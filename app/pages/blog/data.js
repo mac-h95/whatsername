@@ -1,12 +1,12 @@
 import sanity from 'sanity';
 
 export async function blogPageFetch() {
-  const pageData = await client.fetch(`
+  const pageData = await sanity.fetch(`
     *[_id == "blogPage"]{
       heading,
       "posts": *[_type == "post" && !(_id in path("drafts.**"))]{
-        _id,
         slug,
+        snippet,
         title,
         date,
         cover
@@ -24,15 +24,16 @@ export async function postPathFetch() {
   );
 
   return posts.map(({ slug }) => ({
-    params: { slug: post.slug.current }
+    params: { slug: slug.current }
   }));
 }
+
 export async function postPageFetch(slug) {
   const pageData = await sanity.fetch(
     `
     *[slug.current == $slug]{
       title,
-      seo{
+      metadata{
         image{asset{_ref}},
         description,
         keywords[]->{name}
