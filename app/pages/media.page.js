@@ -11,11 +11,9 @@ export const getStaticProps = async () => {
 };
 
 const Media = ({ pageData }) => {
-  console.log(pageData);
   return (
     <>
       <Heading heading={pageData.heading} />
-
       <AlbumList albums={pageData.albums} />
     </>
   );

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { onClickOutside } from 'pages/utility/click';
 import { useRef } from 'react';
 
-const Item = ({ href, name, route, nounderline, setVisible }) => {
+const Item = ({ key, href, name, route, nounderline, setVisible }) => {
   if (href === '/contact') {
     return (
       <>

@@ -35,8 +35,8 @@ const PostList = ({ posts }) => (
         <Image
           src={urlFor(posts[0].cover)}
           alt={posts[0].title}
-          width={800}
-          height={450}
+          width={820}
+          height={460}
         />
         <div className="flex flex-col text-center md:items-start md:text-left">
           <h2 className="text-lg font-bold tracking-wider md:text-4xl">
