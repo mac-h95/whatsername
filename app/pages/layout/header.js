@@ -22,9 +22,9 @@ const Header = ({ logo, route }) => {
   });
 
   return (
-    <header className="flex items-center justify-between w-screen px-6 py-2 mb-3 md:py-6 md:px-10 ">
+    <header className="flex items-center justify-between w-screen px-6 py-2 mb-3 md:py-6 md:px-10">
       <Link href="/">
-        <a>
+        <a className="z-50">
           <Image
             src={urlFor(logo)}
             alt="Whatsername Logo"
@@ -33,7 +33,10 @@ const Header = ({ logo, route }) => {
           />
         </a>
       </Link>
-      <a className="text-3xl md:hidden" onClick={() => setVisible(!visible)}>
+      <a
+        className="z-50 text-3xl md:hidden"
+        onClick={() => setVisible(!visible)}
+      >
         <Icon name="HiMenuAlt3" provider="hi" />
       </a>
       {width > 768 && <Navigation route={route} setVisible={setVisible} />}

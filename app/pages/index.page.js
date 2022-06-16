@@ -24,7 +24,7 @@ const Home = ({ pageData, siteSettings }) => {
     <div>
       <Head page={page} {...siteSettings} />
       <Header logo={siteSettings.favicon} route={route} />
-      <main className="min-h-[90vh] ">
+      <main className="min-h-[90vh] z-10">
         <div className="z-10 flex flex-col justify-start space-y-8 pb-52">
           <h1>{pageData.heading}</h1>
           <Link href="/about">
@@ -36,7 +36,7 @@ const Home = ({ pageData, siteSettings }) => {
           alt={pageData.heading}
           layout="fill"
           objectFit="cover"
-          style={{ opacity: 0.2, zIndex: 1 }}
+          style={{ opacity: 0.2, zIndex: 0, position: 'relative' }}
         />
       </main>
       <Footer

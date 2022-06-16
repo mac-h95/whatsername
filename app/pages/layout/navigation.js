@@ -2,16 +2,22 @@ import Link from 'next/link';
 import { onClickOutside } from 'pages/utility/click';
 import { useRef } from 'react';
 
-const Item = ({ href, name, route, nounderline }) => {
+const Item = ({ href, name, route, nounderline, setVisible }) => {
   if (href === '/contact') {
     return (
       <>
-        <li className="hover:border-b-2 border-primary-500">
+        <li
+          className="hover:border-b-2 border-primary-500"
+          onClick={() => setVisible(false)}
+        >
           <Link href="/contact">
             <a className="md:hidden">Contact</a>
           </Link>
         </li>
-        <li className="hover:border-b-2 border-primary-500">
+        <li
+          className="hover:border-b-2 border-primary-500"
+          onClick={() => setVisible(false)}
+        >
           <Link href="/contact">
             <button className="hidden md:inline-block" href="/contact">
               Contact
@@ -24,6 +30,7 @@ const Item = ({ href, name, route, nounderline }) => {
 
   return (
     <li
+      onClick={() => setVisible(false)}
       className={`hover:md:border-b-2 border-primary-500
         ${route === href && !nounderline && `border-b-2`}
         ${route === href && nounderline && `text-primary-500`}
@@ -51,7 +58,7 @@ const Navigation = ({ route, visible, setVisible, nounderline }) => {
   return (
     <nav
       ref={navRef}
-      className={`absolute top-0 right-0 z-10 w-2/5 h-screen shadow-sm  md:h-auto md:flex md:static items-start md:shadow-none md:bg-transparent bg-background-800 md:w-auto transition-all duration-500 ease-in-out
+      className={`absolute top-0 right-0 z-50 w-2/5 h-screen shadow-sm  md:h-auto md:flex md:static items-start md:shadow-none md:bg-transparent bg-background-800 md:w-auto transition-all duration-500 ease-in-out
         ${visible ? 'w-2/5' : 'w-0'}
       `}
     >
@@ -71,6 +78,7 @@ const Navigation = ({ route, visible, setVisible, nounderline }) => {
             name={name}
             route={route}
             nounderline={nounderline}
+            setVisible={setVisible}
           />
         ))}
       </ul>

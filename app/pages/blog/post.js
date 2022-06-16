@@ -31,19 +31,19 @@ const Post = ({ slug, cover, title, snippet, date }) => (
 const PostList = ({ posts }) => (
   <>
     <Link href={`/blog/posts/${posts[0].slug.current}`}>
-      <a className="flex flex-col items-start mb-8">
+      <a className="flex flex-col items-center max-w-xs mb-8 md:items-start md:max-w-none">
         <Image
           src={urlFor(posts[0].cover)}
           alt={posts[0].title}
           width={800}
           height={450}
         />
-        <div className="text-left">
-          <h2 className="text-4xl font-bold tracking-wider">
+        <div className="text-center md:text-left">
+          <h2 className="font-bold tracking-wider md:text-4xl">
             {posts[0].title}
           </h2>
           <p>{posts[0].snippet}</p>
-          <span className="flex items-center space-x-4">
+          <span className="flex flex-col items-center justify-center mx-auto md:flex-row md:justify-start">
             <span className="flex items-center space-x-1 ">
               <Icon name="FiCalendar" provider="fi" />
               <span>{getDateString(posts[0].date)}</span>
