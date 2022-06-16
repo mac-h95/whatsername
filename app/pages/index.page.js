@@ -21,7 +21,7 @@ const Home = ({ pageData, siteSettings }) => {
   const page =
     route !== '/' && `${route.charAt(1).toUpperCase()}${route.slice(2)} | `;
   return (
-    <div>
+    <>
       <Head page={page} {...siteSettings} />
       <Header logo={siteSettings.favicon} route={route} />
       <main className="min-h-[90vh] z-10">
@@ -43,7 +43,7 @@ const Home = ({ pageData, siteSettings }) => {
         logo={siteSettings.favicon}
         socialMedia={siteSettings.socialMedia}
       />
-    </div>
+    </>
   );
 };
 

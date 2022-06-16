@@ -11,10 +11,10 @@ export const getStaticProps = async () => {
 };
 
 const Events = ({ pageData }) => (
-  <div>
+  <>
     <Heading heading={pageData.heading} />
     <EventsList events={pageData.events} />
-  </div>
+  </>
 );
 
 export default Events;

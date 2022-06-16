@@ -11,10 +11,10 @@ export const getStaticProps = async ({}) => {
 };
 
 const Blog = ({ pageData }) => (
-  <div>
+  <>
     <Heading heading={pageData.heading} />
     <PostList posts={pageData.posts} />
-  </div>
+  </>
 );
 
 export default Blog;
