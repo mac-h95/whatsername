@@ -165,7 +165,7 @@ const Product = ({ product }) => {
                   layout="fill"
                   style={{
                     opacity: index === imageIndex ? 1 : 0.5,
-                    '@media (max-width: 768px)': {
+                    '@media (maxWidth: 768px)': {
                       opacity: 1
                     }
                   }}

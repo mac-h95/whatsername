@@ -1,5 +1,6 @@
 import { commerce } from 'commerce';
 import Heading from 'heading';
+import NextHead from 'next/head';
 import { useState } from 'react';
 import { useCartDispatch, useCartState } from './context';
 
@@ -53,8 +54,11 @@ const Cart = () => {
   });
   return (
     <>
+      <NextHead>
+        <title>Cart</title>
+      </NextHead>
       <Heading heading="Cart" />
-      <div className="flex items-start justify-center w-screen space-x-4">
+      <div className="flex flex-col items-start justify-center w-screen md:space-x-4 flex-re md:flex-row">
         {cart.line_items > 0 ? (
           <div className="flex flex-col items-center space-y-4 text-center">
             <h3 className="text-2xl font-bold">Your cart is empty</h3>
@@ -64,9 +68,11 @@ const Cart = () => {
           </div>
         ) : (
           <>
-            <div className="flex flex-col px-12 py-12 space-y-4 rounded-lg shadow-md bg-gradient-to-b from-background-900 to-background-500">
+            <div className="flex flex-col py-12 space-y-4 rounded-lg shadow-md md:px-12 bg-gradient-to-b from-background-900 to-background-500">
               <form className="flex flex-col max-w-md space-y-6">
-                <h3 className="text-4xl font-bold">Shipping Address</h3>
+                <h3 className="text-4xl font-bold text-center md:text-left">
+                  Shipping Address
+                </h3>
                 <div className="flex items-center space-x-4">
                   <div className="flex flex-col space-y-4">
                     <label className="text-xl">First Name</label>
@@ -204,7 +210,7 @@ const Cart = () => {
                 </button>
               </form>
             </div>
-            <div className="flex flex-col px-12 py-12 space-y-4 rounded-lg shadow-md bg-gradient-to-b from-background-900 to-background-500">
+            <div className="flex flex-col py-12 space-y-4 text-center rounded-lg shadow-md md:text-left mx:px-12 bg-gradient-to-b from-background-900 to-background-500">
               <h3 className="text-4xl font-bold">Shopping Cart</h3>
               {cart.line_items.map((item) => (
                 <CartItem key={item.id} {...item} />
