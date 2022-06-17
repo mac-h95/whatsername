@@ -152,7 +152,7 @@ const Product = ({ product }) => {
             {images.map((image, index) => (
               <div
                 className={`relative w-[80vw] h-[300px] md:w-24 md:h-24 cursor-pointer ${
-                  index === imageIndex && 'border-primary-500 border-2'
+                  index === imageIndex && 'md:border-primary-500 md:border-2'
                 }`}
                 key={index}
                 onClick={() => setImageIndex(index)}
@@ -164,7 +164,10 @@ const Product = ({ product }) => {
                   onClick={() => setImageIndex(index)}
                   layout="fill"
                   style={{
-                    opacity: index === imageIndex ? 1 : 0.5
+                    opacity: index === imageIndex ? 1 : 0.5,
+                    '@media (max-width: 768px)': {
+                      opacity: 1
+                    }
                   }}
                 />
               </div>

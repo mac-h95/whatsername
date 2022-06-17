@@ -15,11 +15,12 @@ export const getStaticProps = async () => {
 };
 
 const Shop = ({ pageData, products }) => {
+  console.log(products);
   return (
     <div>
       <Heading heading={pageData.heading} />
       <ShopNavigation />
-      <ul>
+      <ul className="flex flex-col items-center justify-center space-y-2 md:flex-row md:space-x-2">
         {products.data.map((product) => (
           <li key={product.permalink}>
             <Link href={`/shop/products/${product.permalink}`}>
