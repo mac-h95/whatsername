@@ -61,6 +61,10 @@
   .quantity {
     @apply px-4 py-2 rounded-lg cursor-pointer bg-zinc-600 text-foreground-500;
   }
+
+  .input {
+    @apply w-full px-3 py-1 border-0 border-b-2 bg-transparent border-gray-200  focus:outline-none focus:ring-0 focus:border-primary-600;
+  }
 }
 
 @layer utilities {
