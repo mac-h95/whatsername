@@ -11,13 +11,15 @@ const Layout = ({ children, siteSettings }) => {
     route !== '/' && `${route.charAt(1).toUpperCase()}${route.slice(2)} | `;
   return (
     <CartProvider>
-      <Head page={page} {...siteSettings} />
-      <Header logo={siteSettings.favicon} route={route} />
-      <main>{children}</main>
-      <Footer
-        logo={siteSettings.favicon}
-        socialMedia={siteSettings.socialMedia}
-      />
+      <div className="flex flex-col min-h-screen ">
+        <Head page={page} {...siteSettings} />
+        <Header logo={siteSettings.favicon} route={route} />
+        <main className="flex-1 flex-grow justify-self-start">{children}</main>
+        <Footer
+          logo={siteSettings.favicon}
+          socialMedia={siteSettings.socialMedia}
+        />
+      </div>
     </CartProvider>
   );
 };

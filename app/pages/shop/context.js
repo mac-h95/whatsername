@@ -21,7 +21,8 @@ const CartProvider = ({ children }) => {
     subtotal: {
       raw: 0,
       formatted_with_symbol: '£0.00'
-    }
+    },
+    line_items: []
   });
 
   useEffect(() => {

@@ -35,9 +35,9 @@ const Footer = ({ logo, socialMedia }) => (
       <Link href="/">
         <a className="underline">Whatsername</a>
       </Link>{' '}
-      {new Date().getFullYear()}, Developed by ©
+      {new Date().getFullYear()}, Developed by ©{' '}
       <Link href="https://adaptstudio.co.uk">
-        <a className="underline">adapt</a>
+        <a className="underline lowercase">adapt</a>
       </Link>
       .
     </small>

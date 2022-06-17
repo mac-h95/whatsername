@@ -41,6 +41,7 @@ const Product = ({ product }) => {
     commerce.cart
       .add(product.id, quantity)
       .then(async (cart) => {
+        console.log(cart);
         setCart(cart);
       })
       .catch((err) => console.log(err));
@@ -48,7 +49,7 @@ const Product = ({ product }) => {
   return (
     <div>
       <NextHead>
-        <title>{product.name} | Whatsername</title>
+        <title>{`${product.name} | Whatsername`}</title>
         <meta name="title" content={`${product.name} | Whatsername`} />
         <meta name="description" content={product.description}></meta>
         <meta name="keywords" content={product.category}></meta>
@@ -72,7 +73,8 @@ const Product = ({ product }) => {
               <div key={variantGroup.id} className="flex flex-col space-y-4">
                 <label>{variantGroup.name}</label>
                 <select
-                  className="w-1/2 px-4 py-2 mx-auto text-center bg-transparent border-0 border-b-2 border-gray-300 text-foreground-500 placeholder:text-gray-700 focus:outline-none focus:border-primary-500"
+                  style={{ textAlignLast: 'center', textIndent: '25%' }}
+                  className="w-1/2 py-2 mx-auto bg-transparent border-0 border-b-2 border-gray-300 text-foreground-500 placeholder:text-gray-700 focus:outline-none focus:border-primary-500"
                   onChange={(e) => {
                     setSelectedOptions({
                       ...selectedOptions,
@@ -114,14 +116,14 @@ const Product = ({ product }) => {
             <div className="flex items-center justify-center mx-auto space-x-4">
               <span
                 onClick={() => setQuantity(quantity >= 1 && quantity - 1)}
-                className="px-4 py-2 rounded-lg cursor-pointer bg-zinc-600 text-foreground-500"
+                className="quantity"
               >
                 -
               </span>
               <span className="text-2xl">{quantity}</span>
               <span
                 onClick={() => setQuantity(quantity + 1)}
-                className="px-4 py-2 rounded-lg cursor-pointer bg-zinc-600 text-foreground-500"
+                className="quantity"
               >
                 +
               </span>

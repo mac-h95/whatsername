@@ -4,17 +4,24 @@ import '@fontsource/poppins/900.css';
 import Layout from 'layout';
 import { useRouter } from 'next/router';
 import sanity from 'sanity';
+import CartProvider from './shop/context';
 import './utility/global.css';
 
 const MyApp = ({ Component, pageProps, siteSettings }) => {
   const router = useRouter();
   if (router.pathname === '/' || router.pathname === '/media/albums/[slug]')
-    return <Component {...pageProps} />;
+    return (
+      <CartProvider>
+        <Component {...pageProps} />;
+      </CartProvider>
+    );
 
   return (
-    <Layout siteSettings={siteSettings}>
-      <Component {...pageProps} />
-    </Layout>
+    <CartProvider>
+      <Layout siteSettings={siteSettings}>
+        <Component {...pageProps} />
+      </Layout>
+    </CartProvider>
   );
 };
 
