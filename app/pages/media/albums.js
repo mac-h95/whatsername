@@ -24,7 +24,7 @@ const AlbumList = ({ albums }) => (
   <div className="flex flex-col items-center space-y-8 md:justify-center md:space-y-0 md:flex-wrap md:flex-row">
     {albums.map((album) => (
       <>
-        <Album {...album} />
+        <Album key={album.slug.current} {...album} />
       </>
     ))}
   </div>

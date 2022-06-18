@@ -15,12 +15,11 @@ export const getStaticProps = async () => {
 };
 
 const Shop = ({ pageData, products }) => {
-  console.log(products);
   return (
     <div>
       <Heading heading={pageData.heading} />
       <ShopNavigation />
-      <ul className="flex flex-col items-center justify-center space-y-2 md:flex-row md:space-x-2">
+      <ul className="flex flex-col items-center justify-center space-y-2 md:items-start md:space-y-0 md:flex-row md:space-x-8">
         {products.data.map((product) => (
           <li key={product.permalink}>
             <Link href={`/shop/products/${product.permalink}`}>
@@ -28,8 +27,8 @@ const Shop = ({ pageData, products }) => {
                 <Image
                   src={product.image.url}
                   alt={product.name}
-                  width={400}
-                  height={250}
+                  width={300}
+                  height={300}
                 />
                 <div className="flex flex-col items-center space-y-2">
                   <h3 className="mt-4 text-xl font-bold">{product.name}</h3>

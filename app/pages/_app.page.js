@@ -9,10 +9,10 @@ import './utility/global.css';
 
 const MyApp = ({ Component, pageProps, siteSettings }) => {
   const router = useRouter();
-  if (router.pathname === '/' || router.pathname === '/media/albums/[slug]')
+  if (router.pathname === '/' || router.pathname === '/media/albums/[photos]')
     return (
       <CartProvider>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </CartProvider>
     );
 

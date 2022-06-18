@@ -26,7 +26,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   return {
     props: {
-      pageData: await albumPageFetch(context.params.slug),
+      pageData: await albumPageFetch(context.params.photos),
       siteSettings: await sanity.getDocument('siteSettings')
     }
   };

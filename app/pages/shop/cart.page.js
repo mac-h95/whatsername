@@ -1,6 +1,6 @@
-import { commerce } from 'commerce';
 import Heading from 'heading';
 import NextHead from 'next/head';
+import LoadingSpinner from 'pages/utility/spinner';
 import { useState } from 'react';
 import { useCartDispatch, useCartState } from './context';
 
@@ -23,7 +23,7 @@ const CartItem = ({ id, name, line_total, quantity }) => {
 
   return (
     <div
-      className="flex items-baseline space-x-4 bg-background-700 rounded-lg px-12 py-8 space-evenly shadow-[inset 20px -20px 60px #3e3c3e,
+      className="flex max-w-[80%] items-baseline space-x-4 bg-background-700 rounded-lg px-12 py-8 space-evenly shadow-[inset 20px -20px 60px #3e3c3e,
         inset -20px 20px 60px #545154;]"
     >
       <p>{name}</p>
@@ -50,15 +50,22 @@ const Cart = () => {
       email: '',
       address: { line1: '', line2: '', city: '', postcode: '' }
     },
-    paymen: {}
+    payment: {
+      visible: false
+    }
   });
+
+  const formSubmit = async (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <NextHead>
         <title>Cart</title>
       </NextHead>
       <Heading heading="Cart" />
-      <div className="flex flex-col items-start justify-center w-screen md:space-x-4 flex-re md:flex-row">
+      <div className="flex flex-col-reverse items-center justify-center w-screen px-16 md:items-start md:space-x-4 flex-re md:flex-row">
         {cart.line_items > 0 ? (
           <div className="flex flex-col items-center space-y-4 text-center">
             <h3 className="text-2xl font-bold">Your cart is empty</h3>
@@ -68,108 +75,78 @@ const Cart = () => {
           </div>
         ) : (
           <>
-            <div className="flex flex-col py-12 space-y-4 rounded-lg shadow-md md:px-12 bg-gradient-to-b from-background-900 to-background-500">
-              <form className="flex flex-col max-w-md space-y-6">
+            <div className="flex flex-col items-center px-12 min-h-[25rem] w-[77vw] py-12 space-y-4 rounded-t-lg bg-gradient-to-b from-background-900 to-background-500">
+              <form
+                className="relative flex flex-col max-w-md space-y-6"
+                action={formSubmit}
+              >
                 <h3 className="text-4xl font-bold text-center md:text-left">
-                  Shipping Address
+                  {!details.payment.visible ? (
+                    <span>Shipping Address</span>
+                  ) : (
+                    <span>Payment Details</span>
+                  )}
                 </h3>
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-col max-w-md space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex flex-col space-y-4">
+                      <label className="text-xl">First Name</label>
+                      <input
+                        type="text"
+                        className="input"
+                        value={details.customer.firstName}
+                        onChange={(e) =>
+                          setDetails({
+                            ...details,
+                            customer: {
+                              ...details.customer,
+                              firstName: e.target.value
+                            }
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-4">
+                      <label className="text-xl">Last Name</label>
+                      <input
+                        type="text"
+                        className="input"
+                        value={details.customer.lastName}
+                        onChange={(e) =>
+                          setDetails({
+                            ...details,
+                            customer: {
+                              ...details.customer,
+                              lastName: e.target.value
+                            }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
                   <div className="flex flex-col space-y-4">
-                    <label className="text-xl">First Name</label>
+                    <label className="text-xl">Email Address</label>
                     <input
                       type="text"
                       className="input"
-                      value={details.customer.firstName}
+                      value={details.customer.email}
                       onChange={(e) =>
                         setDetails({
                           ...details,
                           customer: {
                             ...details.customer,
-                            firstName: e.target.value
+                            email: e.target.value
                           }
                         })
                       }
                     />
                   </div>
                   <div className="flex flex-col space-y-4">
-                    <label className="text-xl">Last Name</label>
+                    <label className="text-xl">Address Line 1</label>
                     <input
                       type="text"
                       className="input"
-                      value={details.customer.lastName}
-                      onChange={(e) =>
-                        setDetails({
-                          ...details,
-                          customer: {
-                            ...details.customer,
-                            lastName: e.target.value
-                          }
-                        })
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col space-y-4">
-                  <label className="text-xl">Email Address</label>
-                  <input
-                    type="text"
-                    className="input"
-                    value={details.customer.email}
-                    onChange={(e) =>
-                      setDetails({
-                        ...details,
-                        customer: { ...details.customer, email: e.target.value }
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex flex-col space-y-4">
-                  <label className="text-xl">Address Line 1</label>
-                  <input
-                    type="text"
-                    className="input"
-                    value={details.customer.address.line1}
-                    onChange={(e) =>
-                      setDetails({
-                        ...details,
-                        customer: {
-                          ...details.customer,
-                          address: {
-                            ...details.customer.address,
-                            line1: e.target.value
-                          }
-                        }
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex flex-col space-y-4">
-                  <label className="text-xl">Address Line 2</label>
-                  <input
-                    type="text"
-                    className="input"
-                    value={details.customer.address.line2}
-                    onChange={(e) =>
-                      setDetails({
-                        ...details,
-                        customer: {
-                          ...details.customer,
-                          address: {
-                            ...details.customer.address,
-                            line2: e.target.value
-                          }
-                        }
-                      })
-                    }
-                  />
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex flex-col space-y-4">
-                    <label className="text-xl">City</label>
-                    <input
-                      type="text"
-                      className="input"
-                      value={details.customer.address.city}
+                      value={details.customer.address.line1}
                       onChange={(e) =>
                         setDetails({
                           ...details,
@@ -177,7 +154,7 @@ const Cart = () => {
                             ...details.customer,
                             address: {
                               ...details.customer.address,
-                              city: e.target.value
+                              line1: e.target.value
                             }
                           }
                         })
@@ -185,11 +162,11 @@ const Cart = () => {
                     />
                   </div>
                   <div className="flex flex-col space-y-4">
-                    <label className="text-xl">Post Code</label>
+                    <label className="text-xl">Address Line 2</label>
                     <input
                       type="text"
                       className="input"
-                      value={details.customer.address.postcode}
+                      value={details.customer.address.line2}
                       onChange={(e) =>
                         setDetails({
                           ...details,
@@ -197,24 +174,71 @@ const Cart = () => {
                             ...details.customer,
                             address: {
                               ...details.customer.address,
-                              postcode: e.target.value
+                              line2: e.target.value
                             }
                           }
                         })
                       }
                     />
                   </div>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex flex-col space-y-4">
+                      <label className="text-xl">City</label>
+                      <input
+                        type="text"
+                        className="input"
+                        value={details.customer.address.city}
+                        onChange={(e) =>
+                          setDetails({
+                            ...details,
+                            customer: {
+                              ...details.customer,
+                              address: {
+                                ...details.customer.address,
+                                city: e.target.value
+                              }
+                            }
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-4">
+                      <label className="text-xl">Post Code</label>
+                      <input
+                        type="text"
+                        className="input"
+                        value={details.customer.address.postcode}
+                        onChange={(e) =>
+                          setDetails({
+                            ...details,
+                            customer: {
+                              ...details.customer,
+                              address: {
+                                ...details.customer.address,
+                                postcode: e.target.value
+                              }
+                            }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
-                <button className="w-full px-3 py-2 border-2 rounded-lg border-primary-500 text-background-500 bg-primary-500">
-                  Continue to Payment
-                </button>
               </form>
             </div>
-            <div className="flex flex-col py-12 space-y-4 text-center rounded-lg shadow-md md:text-left mx:px-12 bg-gradient-to-b from-background-900 to-background-500">
-              <h3 className="text-4xl font-bold">Shopping Cart</h3>
-              {cart.line_items.map((item) => (
-                <CartItem key={item.id} {...item} />
-              ))}
+            <div className="flex flex-col py-12 space-y-4 min-h-[25rem] text-center rounded-t-lg w-[60vw] md:text-left mx:px-12 bg-gradient-to-b from-background-900 to-background-500">
+              <h3 className="text-4xl font-bold text-center">Shopping Cart</h3>
+              <div className="flex flex-col items-center space-y-4 overflox-y-scroll">
+                {cart.line_items < 1 ? (
+                  <LoadingSpinner />
+                ) : (
+                  <>
+                    {cart.line_items.map((item) => {
+                      return <CartItem key={item.id} {...item} />;
+                    })}
+                  </>
+                )}
+              </div>
             </div>
           </>
         )}

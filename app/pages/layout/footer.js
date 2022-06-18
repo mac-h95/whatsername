@@ -15,8 +15,8 @@ const Footer = ({ logo, socialMedia }) => (
                 : 'https://cdn.sanity.io/images/878j5f8u/production/1c96f0af377df2e201794c6085651da6b71812fb-734x792.png'
             }
             alt="Whatsername Logo"
-            width={90}
-            height={90}
+            width={50}
+            height={50}
           />
         </a>
       </Link>

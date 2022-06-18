@@ -39,13 +39,13 @@ const Product = ({ product }) => {
 
   const addToCart = async () =>
     commerce.cart
-      .add(product.id, quantity)
+      .add(product.id, quantity, selectedOptions.variants)
       .then(async (cart) => {
-        console.log(cart);
         setCart(cart);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => console.error(error));
 
+  console.log(selectedOptions);
   return (
     <div>
       <NextHead>
@@ -73,14 +73,14 @@ const Product = ({ product }) => {
               <div key={variantGroup.id} className="flex flex-col space-y-4">
                 <label>{variantGroup.name}</label>
                 <select
-                  style={{ textAlignLast: 'center', textIndent: '25%' }}
+                  style={{ textAlignLast: 'center', textIndent: '30%' }}
                   className="w-1/2 py-2 mx-auto bg-transparent border-0 border-b-2 border-gray-300 text-foreground-500 placeholder:text-gray-700 focus:outline-none focus:border-primary-500"
                   onChange={(e) => {
                     setSelectedOptions({
                       ...selectedOptions,
                       variants: {
                         ...selectedOptions.variants,
-                        [variantGroup.name]: e.target.value
+                        [variantGroup.id]: e.target.value
                       }
                     });
                   }}
@@ -91,26 +91,6 @@ const Product = ({ product }) => {
                     </option>
                   ))}
                 </select>
-              </div>
-            ))}
-            {product.extra_fields.map((extra_field) => (
-              <div key={extra_field.id} className="flex flex-col space-y-2">
-                <label>{extra_field.name}</label>
-                <input
-                  className="w-1/2 px-4 py-2 mx-auto text-center bg-transparent border-0 border-b-2 border-gray-300 placeholder:text-gray-700 focus:outline-none text-foreground-500 focus:border-primary-500"
-                  type="text"
-                  name={extra_field.name}
-                  placeholder={extra_field.name}
-                  onChange={(e) => {
-                    setSelectedOptions({
-                      ...selectedOptions,
-                      extra_fields: {
-                        ...selectedOptions.extra_fields,
-                        [extra_field.name]: e.target.value
-                      }
-                    });
-                  }}
-                />
               </div>
             ))}
             <div className="flex items-center justify-center mx-auto space-x-4">
@@ -164,10 +144,7 @@ const Product = ({ product }) => {
                   onClick={() => setImageIndex(index)}
                   layout="fill"
                   style={{
-                    opacity: index === imageIndex ? 1 : 0.5,
-                    '@media (maxWidth: 768px)': {
-                      opacity: 1
-                    }
+                    opacity: index === imageIndex ? 1 : 0.5
                   }}
                 />
               </div>

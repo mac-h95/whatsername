@@ -17,13 +17,13 @@ const Header = ({ title, seo, cover, artist, venue, date }) => (
       <meta name="og:keywords" content={seo.keywords}></meta>
       <meta name="og:image" content={urlFor(seo.image)}></meta>
     </NextHead>
-    <div className="grid w-screen min-h-screen place-items-center ">
+    <div className="grid w-screen min-h-screen place-items-center">
       <Image
         src={urlFor(cover)}
         alt={artist}
         layout="fill"
         objectFit="cover"
-        style={{ marginTop: '-1rem' }}
+        style={{ marginTop: '-3rem' }}
       />
       <div className="z-40 flex flex-col items-center pb-64 ">
         <h1 className="font-bold tracking-widest md:text-8xl">{artist}</h1>

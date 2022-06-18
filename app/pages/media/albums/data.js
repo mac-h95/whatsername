@@ -8,13 +8,13 @@ export async function albumPathsFetch() {
   );
 
   return albums.map((album) => ({
-    params: { slug: album.slug.current }
+    params: { photos: album.slug.current }
   }));
 }
 
-export async function albumPageFetch(slug) {
+export async function albumPageFetch(photos) {
   const pageData = await sanity.fetch(
-    `*[slug.current == $slug]{
+    `*[slug.current == $photos]{
       _id,
       slug,
       seo{
@@ -33,7 +33,7 @@ export async function albumPageFetch(slug) {
         photographer->{name, link}
       },
     }`,
-    { slug }
+    { photos }
   );
   return pageData[0];
 }
