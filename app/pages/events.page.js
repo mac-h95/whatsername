@@ -1,19 +1,21 @@
 import Heading from 'heading';
 import { eventsPageFetch } from './events/data';
-import EventsList from './events/event';
+import EventsList from './events/list';
 
 export const getStaticProps = async () => {
+  const { heading, events } = await eventsPageFetch();
   return {
     props: {
-      pageData: await eventsPageFetch()
+      heading,
+      events
     }
   };
 };
 
-const Events = ({ pageData }) => (
+const Events = ({ heading, events }) => (
   <>
-    <Heading heading={pageData.heading} />
-    <EventsList events={pageData.events} />
+    <Heading heading={heading} />
+    <EventsList events={events} />
   </>
 );
 

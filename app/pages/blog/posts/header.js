@@ -28,7 +28,7 @@ const Header = ({ title, metadata, cover, date, author }) => (
       <div>
         <div className="text-center md:text-left">
           <h2 className="font-bold tracking-wider md:text-4xl">{title}</h2>
-          <div classname="flex items-center justify-between md:items-start">
+          <div className="flex items-center justify-between md:items-start">
             <span className="flex flex-col items-center justify-center max-w-sm mx-0 md:items-start">
               <span className="flex items-center space-x-1 ">
                 <Icon name="FiCalendar" provider="fi" />

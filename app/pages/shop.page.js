@@ -1,54 +1,26 @@
-import { commerce } from 'commerce';
 import Heading from 'heading';
-import Image from 'next/image';
-import Link from 'next/link';
-import sanity from 'sanity';
-import ShopNavigation from './shop/checkout/store-navigation';
+
+import { shopPageFetch } from './shop/data';
+import List from './shop/list';
+import Navigation from './shop/navigation';
 
 export const getStaticProps = async () => {
+  const { heading, products } = await shopPageFetch();
+
   return {
     props: {
-      pageData: await sanity.getDocument('shopPage'),
-      products: await commerce.products.list()
+      heading,
+      products
     }
   };
 };
 
-const Shop = ({ pageData, products }) => {
-  return (
-    <div>
-      <Heading heading={pageData.heading} />
-      <ShopNavigation />
-      <ul className="flex flex-col items-center justify-center space-y-2 md:items-start md:space-y-0 md:flex-row md:space-x-8">
-        {products.data.map((product) => (
-          <li key={product.permalink}>
-            <Link href={`/shop/products/${product.permalink}`}>
-              <a className="flex flex-col items-center px-4 text-center md:px-0">
-                <Image
-                  src={product.image.url}
-                  alt={product.name}
-                  width={300}
-                  height={300}
-                />
-                <div className="flex flex-col items-center space-y-2">
-                  <h3 className="mt-4 text-xl font-bold">{product.name}</h3>
-                  <span className="font-thin tracking-wider">
-                    {
-                      product.attributes.filter(
-                        (attribute) => attribute.name === 'Available In'
-                      )[0].value
-                    }
-                  </span>
-                  <span className="font-bold">
-                    {product.price.formatted_with_symbol}
-                  </span>
-                </div>
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+export const Shop = ({ heading, products }) => (
+  <>
+    <Heading heading={heading} />
+    <Navigation />
+    <List products={products} />
+  </>
+);
+
 export default Shop;

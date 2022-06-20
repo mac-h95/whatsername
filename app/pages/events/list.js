@@ -33,9 +33,7 @@ const EventsList = ({ events }) => {
     <div className="flex flex-col items-start space-y-8 md:px-32 md:w-screen">
       <div className="flex flex-col items-center space-y-8 md:justify-start md:space-y-0 md:flex-wrap md:flex-row ">
         {upcomingEvents.map((event) => (
-          <>
-            <Event key={event._id} {...event} />
-          </>
+          <Event key={event._id} {...event} />
         ))}
       </div>
       <div className="">

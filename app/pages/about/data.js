@@ -13,7 +13,7 @@ export async function aboutPageFetch() {
         pronouns,
         role
       },
-      "cta": *[_id == "cta"]{
+      "cta": *[_id == "cta"][0]{
         heading,
         subheading,
         subheading2,

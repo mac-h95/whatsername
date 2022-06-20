@@ -4,6 +4,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from 'sanity';
 
+const Featured = ({ slug, cover, title, snippet, date }) => (
+  <Link href={`/blog/posts/${slug.current}`}>
+    <a className="flex flex-col items-center w-screen px-8 mb-8 space-y-3 md:items-start md:w-auto">
+      <Image src={urlFor(cover)} alt={title} width={820} height={460} />
+      <div className="flex flex-col text-center md:items-start md:text-left">
+        <h2 className="text-lg font-bold tracking-wider md:text-4xl">
+          {title}
+        </h2>
+        <p className="text-md">{snippet}</p>
+        <span className="flex flex-col items-center justify-center space-x-4 md:flex-row md:justify-start">
+          <span className="flex items-center space-x-1 ">
+            <Icon name="FiCalendar" provider="fi" />
+            <span>{getDateString(date)}</span>
+          </span>
+          <span className="flex items-center space-x-1 lowercase">
+            <Icon name="FiClock" provider="fi" />
+            <span>5min</span>
+          </span>
+        </span>
+      </div>
+    </a>
+  </Link>
+);
+
 const Post = ({ slug, cover, title, snippet, date }) => (
   <Link href={`/blog/posts/${slug}`}>
     <a
@@ -30,32 +54,7 @@ const Post = ({ slug, cover, title, snippet, date }) => (
 
 const PostList = ({ posts }) => (
   <>
-    <Link href={`/blog/posts/${posts[0].slug.current}`}>
-      <a className="flex flex-col items-center w-screen px-8 mb-8 space-y-3 md:items-start md:w-auto">
-        <Image
-          src={urlFor(posts[0].cover)}
-          alt={posts[0].title}
-          width={820}
-          height={460}
-        />
-        <div className="flex flex-col text-center md:items-start md:text-left">
-          <h2 className="text-lg font-bold tracking-wider md:text-4xl">
-            {posts[0].title}
-          </h2>
-          <p className="text-md">{posts[0].snippet}</p>
-          <span className="flex flex-col items-center justify-center space-x-4 md:flex-row md:justify-start">
-            <span className="flex items-center space-x-1 ">
-              <Icon name="FiCalendar" provider="fi" />
-              <span>{getDateString(posts[0].date)}</span>
-            </span>
-            <span className="flex items-center space-x-1 lowercase">
-              <Icon name="FiClock" provider="fi" />
-              <span>5min</span>
-            </span>
-          </span>
-        </div>
-      </a>
-    </Link>
+    <Featured {...posts[0]} />
     <div className="flex flex-col items-center space-y-4">
       {posts.slice(1).map((post) => (
         <Post

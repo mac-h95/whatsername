@@ -8,11 +8,12 @@
     @apply font-sans bg-background-500 text-foreground-500 overflow-x-hidden uppercase;
   }
 
-  body {
-    @apply flex flex-col min-h-screen;
-    & main {
-      @apply flex-1 flex flex-col items-center justify-center flex-grow;
-    }
+  main {
+    @apply flex-1 flex flex-col items-center justify-center flex-grow;
+  }
+
+  .page {
+    @apply flex flex-col items-center min-h-screen;
   }
 
   h1 {
@@ -103,21 +104,19 @@
 }
 
 @layer utilities {
-  @variants responsive {
-    .masonry {
-      column-gap: 1.5em;
-      column-count: 1;
-    }
-    .masonry-sm {
-      column-gap: 1.5em;
-      column-count: 2;
-    }
-    .masonry-md {
-      column-gap: 1.5em;
-      column-count: 3;
-    }
-    .break-inside {
-      break-inside: avoid;
-    }
+  .masonry {
+    column-gap: 1.5em;
+    column-count: 1;
+  }
+  .masonry-sm {
+    column-gap: 1.5em;
+    column-count: 2;
+  }
+  .masonry-md {
+    column-gap: 1.5em;
+    column-count: 3;
+  }
+  .break-inside {
+    break-inside: avoid;
   }
 }

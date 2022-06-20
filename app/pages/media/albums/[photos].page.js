@@ -1,20 +1,6 @@
-import sanity from 'sanity';
-import Footer from '../../layout/footer';
-import LayoutHeader from '../../layout/header';
 import { albumPageFetch, albumPathsFetch } from './data';
-import Header from './header';
-import Photos from './photos';
-
-export default function MediaAlbum({ pageData, siteSettings }) {
-  return (
-    <>
-      <LayoutHeader {...siteSettings} />
-      <Header {...pageData} />
-      <Photos {...pageData} />
-      <Footer {...siteSettings} />
-    </>
-  );
-}
+import Hero from './hero';
+import PhotoList from './list';
 
 export const getStaticPaths = async () => {
   return {
@@ -26,8 +12,18 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context) => {
   return {
     props: {
-      pageData: await albumPageFetch(context.params.photos),
-      siteSettings: await sanity.getDocument('siteSettings')
+      pageData: await albumPageFetch(context.params.photos)
     }
   };
 };
+
+const MediaAlbum = ({ pageData }) => {
+  return (
+    <>
+      <Hero {...pageData} />
+      <PhotoList {...pageData} />
+    </>
+  );
+};
+
+export default MediaAlbum;

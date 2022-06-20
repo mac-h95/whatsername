@@ -1,3 +1,24 @@
 import sanity from 'sanity';
 
-export const pageData = await sanity.getDocument('shopPage');
+export async function shopPageFetch() {
+  const pageData = await sanity.fetch(`
+    *[_id == "shopPage"]{
+      heading,
+      "products": *[_type == "product"]{
+        slug,
+        available_in,
+        category->{
+          name
+        },
+        description,
+        images,
+        in_stock,
+        name,
+        options->,
+        price
+      }
+    }
+  `);
+
+  return pageData[0];
+}

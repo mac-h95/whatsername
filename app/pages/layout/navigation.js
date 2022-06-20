@@ -32,8 +32,8 @@ const Item = ({ href, name, route, nounderline, setVisible }) => {
     <li
       onClick={() => setVisible(false)}
       className={`hover:md:border-b-2 border-primary-500
-        ${route === href && !nounderline && `border-b-2`}
-        ${route === href && nounderline && `text-primary-500`}
+        ${route.includes(href) && !nounderline && `border-b-2`}
+        ${route.includes(href) && nounderline && `text-primary-500`}
       `}
     >
       <Link href={href}>

@@ -32,7 +32,7 @@ const Members = ({ team, founders }) => {
       }`}
     >
       {founders && (
-        <h2 className="mb-16 -mt-16 text-3xl font-semibold tracking-widest  text-background-500">
+        <h2 className="mb-16 -mt-16 text-3xl font-semibold tracking-widest text-background-500">
           Meet The Team
         </h2>
       )}

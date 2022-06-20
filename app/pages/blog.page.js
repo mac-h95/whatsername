@@ -1,19 +1,21 @@
 import Heading from 'heading';
 import { blogPageFetch } from './blog/data';
-import PostList from './blog/post';
+import PostList from './blog/list';
 
 export const getStaticProps = async ({}) => {
+  const { heading, posts } = await blogPageFetch();
   return {
     props: {
-      pageData: await blogPageFetch()
+      heading,
+      posts
     }
   };
 };
 
-const Blog = ({ pageData }) => (
+const Blog = ({ heading, posts }) => (
   <>
-    <Heading heading={pageData.heading} />
-    <PostList posts={pageData.posts} />
+    <Heading heading={heading} />
+    <PostList posts={posts} />
   </>
 );
 

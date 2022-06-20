@@ -1,24 +1,18 @@
-import Icon from 'icon';
 import { urlFor } from 'sanity';
+import Photographer from './photographer';
 import checkPhotographers from './sort-photogtaphers';
 
-export default function Photos({ images }) {
+export default function PhotoList({ images }) {
   const photogtaphers = checkPhotographers(images);
   return (
-    <div className="">
+    <>
       <div
         id="photos"
         className="flex flex-col items-center w-screen px-8 space-y-16"
       >
         {photogtaphers.map((photographer) => (
           <div key={photographer.name}>
-            <a
-              href={photographer.link}
-              className="flex items-baseline space-x-2"
-            >
-              <Icon name="FiCamera" provider="fi" />
-              <span>{photographer.name}</span>
-            </a>
+            <Photographer {...photographer} />
             <div className="sm:masonry-sm md:masonry-md masonry">
               {images
                 .filter(
@@ -27,15 +21,15 @@ export default function Photos({ images }) {
                 .map((image) => (
                   <img
                     className="mt-2 md:mt-0"
-                    key={image.id}
+                    key={image.caption}
                     src={urlFor(image.image)}
-                    alt={image.alt}
+                    alt={image.caption}
                   />
                 ))}
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

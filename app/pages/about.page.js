@@ -1,20 +1,11 @@
 import ActionCall from './about/cta';
 import { aboutPageFetch } from './about/data';
-import Members from './about/members';
+import Members from './about/list';
 import BodyText from './utility/body';
 import Heading from './utility/heading';
 
 export const getStaticProps = async () => {
-  return {
-    props: {
-      pageData: await aboutPageFetch()
-    }
-  };
-};
-
-const About = ({ pageData }) => {
-  const cta = { ...pageData.cta[0] };
-  const { body, team } = { ...pageData };
+  const { cta, body, team, heading } = await aboutPageFetch();
   const { founders, members } = {
     founders: team.filter((member) => member.founder),
     members: team
@@ -26,12 +17,22 @@ const About = ({ pageData }) => {
       })
   };
 
+  return {
+    props: {
+      cta,
+      body,
+      founders,
+      members,
+      heading
+    }
+  };
+};
+
+const About = ({ cta, body, founders, members, heading }) => {
   return (
     <>
-      <Heading heading={pageData.heading} />
-      <div className="max-w-[85vw] prose mx-auto normal-case text-foreground-500 md:max-w-prose snap-center">
-        <BodyText value={body} />
-      </div>
+      <Heading heading={heading} />
+      <BodyText value={body} />
       <Members team={founders} founders />
       <Members team={members} />
       <ActionCall {...cta} />
