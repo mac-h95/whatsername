@@ -1,38 +1,131 @@
-const Details = ({name, available_in, description}) => (
- <>
-  <h1 className="text-2xl font-bold">{name}</h1>
-  <p>{available_in}</p>
-  <BodyText value={description} />
- </>
-)
+import NextHead from 'next/head';
+import { useState } from 'react';
+import { urlFor } from 'sanity';
+
+const Head = ({ name, description, category, image }) => (
+  <NextHead>
+    <title>{`${name} | Whatsername`}</title>
+    <meta name="title" content={name} />
+    <meta name="description" content={description}></meta>
+    <meta name="keywords" content={category}></meta>
+    <meta name="image" content={urlFor(image)}></meta>
+    <meta name="og:title" content={name}></meta>
+    <meta name="og:description" content={description}></meta>
+    <meta name="og:keywords" content={category}></meta>
+    <meta name="og:image" content={urlFor(image)}></meta>
+  </NextHead>
+);
+
+const Details = ({ name, available_in, description }) => (
+  <>
+    <h1 className="text-4xl font-bold">{name}</h1>
+    <p className="font-bold">{available_in}</p>
+    <p className="prose normal-case text-foreground-500">{description}</p>
+  </>
+);
 
 const Options = ({ options }) => (
-  {options.map((option) => (
-    <div key={option.name}>
-      <label className="block text-sm font-bold">{option.name}</label>
-      {option.values[0] === 'custom' ? (
-        <input type="text" />
+  <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
+    {options.map((option) => (
+      <div key={option.name}>
+        <label className="block text-sm font-bold">{option.name}</label>
+        {option.values[0] === 'custom' ? (
+          <input
+            type="text"
+            className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+          />
         ) : (
-          <select className="w-full">
-          {option.values.map((value) => (
-            <option key={value}>{value}</option>
+          <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
+            {option.values.map((value) => (
+              <option
+                key={value}
+                className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+              >
+                {value}
+              </option>
             ))}
-        </select>
-      )}
-    </div>
-  ))}
-  );
+          </select>
+        )}
+      </div>
+    ))}
+  </div>
+);
 
-  const Price = ({ price, sale_price, price }) => (
-    <p className={`${!in_stock && 'text-red-500'}`}>
-      {in_stock ? (sale_price ? sale_price : price) : 'Out of Stock'}
-    </p>
-  );
+const Quantity = ({ quantity, setQuantity }) => (
+  <div className="flex items-center justify-center mx-auto space-x-4">
+    <span
+      onClick={() => setQuantity(quantity >= 1 && quantity - 1)}
+      className="quantity"
+    >
+      -
+    </span>
+    <span className="text-2xl">{quantity}</span>
+    <span onClick={() => setQuantity(quantity + 1)} className="quantity">
+      +
+    </span>
+  </div>
+);
 
-const DetailsPane = ({ name, available_in, description, options, price, sale_price, in_stock }) => (
-    <div className="flex flex-col items-center justify-center space-y-2">
-      <Details name={name} available_in={available_in} description={description} />
-      <Option options={options} />
-      <Price price={price} sale_price={sale_price} in_stock={in_stock} />
+const Price = ({ price, sale_price, in_stock, quantity }) => (
+  <p className={`text-4xl font-bold ${!in_stock && 'text-red-500'}`}>
+    {in_stock
+      ? sale_price
+        ? `£${sale_price * quantity}`
+        : `£${price * quantity}`
+      : 'Out of Stock'}
+  </p>
+);
+
+const Add = ({ in_stock }) => (
+  <button
+    disabled={in_stock ? false : true}
+    className={`${
+      !in_stock &&
+      'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
+    } cursor-pointer disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
+  >
+    Add to Cart
+  </button>
+);
+
+const DetailsPanel = ({
+  name,
+  available_in,
+  description,
+  options,
+  image,
+  price,
+  category,
+  sale_price,
+  quantity,
+  setQuantity,
+  in_stock
+}) => {
+  const [details, setDetails] = useState({ products: [] });
+  return (
+    <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
+      <Head
+        name={name}
+        description={description}
+        category={category}
+        image={image}
+      />
+      <Details
+        name={name}
+        available_in={available_in}
+        description={description}
+      />
+      <Options options={options} setProducts />
+      <Quantity quantity={quantity} setQuantity={setQuantity} />
+      <Price
+        price={price}
+        sale_price={sale_price}
+        in_stock={in_stock}
+        quantity={quantity}
+      />
+      <Add in_stock={in_stock} />
     </div>
-)
+  );
+};
+
+export default DetailsPanel;

@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import sanity from 'sanity';
-import DetailsPane from './details';
-import ImagesPane from './images';
+import Navigation from '../navigation';
+import DetailsPanel from './details';
+import ImagesPanel from './images';
 
 export const getStaticPaths = async () => {
   const products = await sanity.fetch(`
@@ -11,20 +13,24 @@ export const getStaticPaths = async () => {
   }
   `);
 
-  return products.map(({ slug }) => ({
-    params: { product: slug.current }
-  }));
+  return {
+    paths: products.map(({ slug }) => ({
+      params: { product: slug.current }
+    })),
+    fallback: false
+  };
 };
 
 export const getStaticProps = async ({ params }) => {
-  const product = await sanity.fetch(
+  const res = await sanity.fetch(
     `
-  *[slug.current == $product]{
-    name, description, category, images, in_stock, options, price, available_in
-  }
+    *[slug.current == $product]{
+      name, description, category, images, in_stock, options[]->{name, values}, price, available_in
+    }
   `,
     { product: params.product }
   );
+  const product = res[0];
 
   return {
     props: {
@@ -34,11 +40,21 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Product = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+
   return (
-    <div className="flex items-center justify-center space-x-4">
-      <DetailsPane {...product} />
-      <ImagesPane images={product.images} />
-    </div>
+    <>
+      <Navigation />
+      <div className="flex items-start justify-center space-x-4">
+        <DetailsPanel
+          {...product}
+          image={product.images[0]}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
+        <ImagesPanel images={product.images} />
+      </div>
+    </>
   );
 };
 

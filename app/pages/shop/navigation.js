@@ -11,7 +11,11 @@ const Navigation = () => {
       {pathname === '/shop' ? (
         <div className="flex-1" />
       ) : (
-        <Icon name="FiArrowLeft" provider="fi" />
+        <Link href="/shop">
+          <a>
+            <Icon name="FiArrowLeft" provider="fi" />
+          </a>
+        </Link>
       )}
       <Link href="/shop/checkout">
         <div className="flex items-center space-x-2 text-2xl">

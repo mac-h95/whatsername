@@ -15,7 +15,8 @@ export async function shopPageFetch() {
         in_stock,
         name,
         options->,
-        price
+        price,
+        sale_price
       }
     }
   `);
