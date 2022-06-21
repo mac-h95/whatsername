@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { urlFor } from 'sanity';
 
 const Product = ({ slug, in_stock, images, name, available_in, price }) => (
-  <Link href={slug}>
-    <div
+  <Link href={`/shop/products/${slug.current}`}>
+    <a
       className={`flex flex-col items-center justify-center space-y-2 ${
         !in_stock && 'opacity-25'
       }`}
@@ -17,7 +17,7 @@ const Product = ({ slug, in_stock, images, name, available_in, price }) => (
           {in_stock ? price : 'Out of Stock'}
         </p>
       </div>
-    </div>
+    </a>
   </Link>
 );
 

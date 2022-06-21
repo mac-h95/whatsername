@@ -1,5 +1,4 @@
 import Heading from 'heading';
-
 import { shopPageFetch } from './shop/data';
 import List from './shop/list';
 import Navigation from './shop/navigation';

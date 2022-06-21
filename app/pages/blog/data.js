@@ -19,7 +19,9 @@ export async function blogPageFetch() {
 export async function postPathFetch() {
   const posts = await sanity.fetch(
     `*[_type == "post" && !(_id in path("drafts.**"))]{
-    slug
+    slug{
+      current
+    }
   }`
   );
 
