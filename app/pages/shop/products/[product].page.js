@@ -25,7 +25,7 @@ export const getStaticProps = async ({ params }) => {
   const res = await sanity.fetch(
     `
     *[slug.current == $product]{
-      name, description, category, images, in_stock, options[]->{name, values}, price, available_in
+      slug, name, description, category, images, in_stock, options[]->{name, values}, price, sale_price, available_in
     }
   `,
     { product: params.product }

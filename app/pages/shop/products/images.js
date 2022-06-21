@@ -6,7 +6,7 @@ const Thumbnails = ({ images, currentIndex, setIndex }) => (
   <div className="flex flex-col space-y-2">
     {images.map((image, index) => (
       <div
-        key={image.asset.id}
+        key={image.asset._ref}
         className={`flex items-center justify-center cursor-pointer ${
           index === currentIndex && 'border-2 border-primary-500'
         }`}

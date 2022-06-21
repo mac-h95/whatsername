@@ -54,7 +54,7 @@ const Options = ({ options }) => (
 const Quantity = ({ quantity, setQuantity }) => (
   <div className="flex items-center justify-center mx-auto space-x-4">
     <span
-      onClick={() => setQuantity(quantity >= 1 && quantity - 1)}
+      onClick={() => setQuantity(quantity == 1 ? (quantity = 1) : quantity - 1)}
       className="quantity"
     >
       -
@@ -68,11 +68,18 @@ const Quantity = ({ quantity, setQuantity }) => (
 
 const Price = ({ price, sale_price, in_stock, quantity }) => (
   <p className={`text-4xl font-bold ${!in_stock && 'text-red-500'}`}>
-    {in_stock
-      ? sale_price
-        ? `£${sale_price * quantity}`
-        : `£${price * quantity}`
-      : 'Out of Stock'}
+    {in_stock ? (
+      sale_price ? (
+        <div className="flex items-center space-x-2">
+          <p className="line-through opacity-60">£{price}</p>
+          <p>£{sale_price * quantity}</p>
+        </div>
+      ) : (
+        `£${price * quantity}`
+      )
+    ) : (
+      'Out of Stock'
+    )}
   </p>
 );
 
@@ -90,6 +97,7 @@ const Add = ({ in_stock }) => (
 
 const DetailsPanel = ({
   name,
+  slug,
   available_in,
   description,
   options,
@@ -101,7 +109,15 @@ const DetailsPanel = ({
   setQuantity,
   in_stock
 }) => {
-  const [details, setDetails] = useState({ products: [] });
+  const [selectedOptions, setSelectedOptions] = useState();
+  const details = {
+    slug,
+    name,
+    quantity,
+    options: selectedOptions,
+    total_amount: sale_price ? quantity * sale_price : quantity * price
+  };
+
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
       <Head
@@ -115,7 +131,11 @@ const DetailsPanel = ({
         available_in={available_in}
         description={description}
       />
-      <Options options={options} setProducts />
+      <Options
+        options={options}
+        selectedOptions={selectedOptions}
+        setSelectedOptions={setSelectedOptions}
+      />
       <Quantity quantity={quantity} setQuantity={setQuantity} />
       <Price
         price={price}
