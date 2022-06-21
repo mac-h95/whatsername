@@ -1,45 +1,23 @@
-import sanity from 'sanity';
-import DetailsPane from './details';
-import ImagesPane from './images';
+import { albumPageFetch, albumPathsFetch } from './data';
 
 export const getStaticPaths = async () => {
-  const products = await sanity.fetch(`
-  *[_type == "product" && !(_id in path("drafts.**"))]{
-    slug{
-      current
-    }
-  }
-  `);
-
-  return products.map(({ slug }) => ({
-    params: { product: slug.current }
-  }));
+  return {
+    paths: await albumPathsFetch(),
+    fallback: false
+  };
 };
 
-export const getStaticProps = async ({ params }) => {
-  const product = await sanity.fetch(
-    `
-  *[slug.current == $product]{
-    name, description, category, images, in_stock, options, price, available_in
-  }
-  `,
-    { product: params.product }
-  );
-
+export const getStaticProps = async (context) => {
   return {
     props: {
-      product
+      pageData: await albumPageFetch(context.params.photos)
     }
   };
 };
 
-const Product = ({ product }) => {
-  return (
-    <div className="flex items-center justify-center space-x-4">
-      <DetailsPane {...product} />
-      <ImagesPane images={product.images} />
-    </div>
-  );
+const MediaAlbum = ({ pageData }) => {
+  console.log(pageData);
+  return <></>;
 };
 
-export default Product;
+export default MediaAlbum;
