@@ -24,7 +24,7 @@ const Details = ({ name, available_in, description }) => (
   </>
 );
 
-const Options = ({ options }) => (
+const Options = ({ options, selectedOptions, setSelectedOptions }) => (
   <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
     {options.map((option) => (
       <div key={option.name}>
@@ -33,6 +33,12 @@ const Options = ({ options }) => (
           <input
             type="text"
             className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+            onChange={(e) =>
+              setSelectedOptions({
+                ...selectedOptions,
+                [option.name]: e.target.value
+              })
+            }
           />
         ) : (
           <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
@@ -40,6 +46,12 @@ const Options = ({ options }) => (
               <option
                 key={value}
                 className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+                onChange={(e) =>
+                  setSelectedOptions({
+                    ...selectedOptions,
+                    [option.name]: value
+                  })
+                }
               >
                 {value}
               </option>
@@ -109,7 +121,9 @@ const DetailsPanel = ({
   setQuantity,
   in_stock
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState();
+  const [selectedOptions, setSelectedOptions] = useState({});
+  console.log(selectedOptions);
+
   const details = {
     slug,
     name,
@@ -117,6 +131,8 @@ const DetailsPanel = ({
     options: selectedOptions,
     total_amount: sale_price ? quantity * sale_price : quantity * price
   };
+
+  console.log(details);
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -131,11 +147,7 @@ const DetailsPanel = ({
         available_in={available_in}
         description={description}
       />
-      <Options
-        options={options}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
-      />
+      <Options options={options} setSelectedOptions={setSelectedOptions} />
       <Quantity quantity={quantity} setQuantity={setQuantity} />
       <Price
         price={price}
