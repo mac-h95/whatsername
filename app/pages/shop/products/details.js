@@ -1,6 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js'
 import NextHead from 'next/head'
 import { urlFor } from 'sanity'
+import { useState } from 'react'
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -103,6 +104,8 @@ const DetailsPanel = ({
   options,
   image,
   price,
+  selectedOptions,
+  setSelectedOptions,
   category,
   sale_price,
   quantity,
@@ -117,7 +120,9 @@ const DetailsPanel = ({
     total_price: sale_price ? quantity * sale_price : quantity * price
   }
 
-  const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
+  const stripePromise = loadStripe(
+    'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
+  )
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -140,9 +145,8 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form action={'/api/checkout-sessions'} method="POST">
+      <form action="/api/checkout-sessions" method="POST">
         <button
-          onClick={addToCart}
           disabled={in_stock ? false : true}
           className={`${
             !in_stock &&

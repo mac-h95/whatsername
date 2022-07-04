@@ -41,6 +41,7 @@ export const getStaticProps = async ({ params }) => {
 
 const Product = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
+  const [selectedOptions, setSelectedOptions] = useState([])
 
   return (
     <>
@@ -49,6 +50,8 @@ const Product = ({ product }) => {
         <DetailsPanel
           {...product}
           image={product.images[0]}
+          selectedOptions={selectedOptions}
+          setSelectedOptions={setSelectedOptions}
           quantity={quantity}
           setQuantity={setQuantity}
         />
