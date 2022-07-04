@@ -1,6 +1,6 @@
-import NextHead from 'next/head';
-import { useState } from 'react';
-import { urlFor } from 'sanity';
+import { loadStripe } from '@stripe/stripe-js'
+import NextHead from 'next/head'
+import { urlFor } from 'sanity'
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -14,7 +14,7 @@ const Head = ({ name, description, category, image }) => (
     <meta name="og:keywords" content={category}></meta>
     <meta name="og:image" content={urlFor(image)}></meta>
   </NextHead>
-);
+)
 
 const Details = ({ name, available_in, description }) => (
   <>
@@ -22,7 +22,7 @@ const Details = ({ name, available_in, description }) => (
     <p className="font-bold">{available_in}</p>
     <p className="prose normal-case text-foreground-500">{description}</p>
   </>
-);
+)
 
 const Options = ({ options, selectedOptions, setSelectedOptions }) => (
   <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
@@ -61,7 +61,7 @@ const Options = ({ options, selectedOptions, setSelectedOptions }) => (
       </div>
     ))}
   </div>
-);
+)
 
 const Quantity = ({ quantity, setQuantity }) => (
   <div className="flex items-center justify-center mx-auto space-x-4">
@@ -76,15 +76,15 @@ const Quantity = ({ quantity, setQuantity }) => (
       +
     </span>
   </div>
-);
+)
 
 const Price = ({ price, sale_price, in_stock, quantity }) => (
   <p className={`text-4xl font-bold ${!in_stock && 'text-red-500'}`}>
     {in_stock ? (
       sale_price ? (
         <div className="flex items-center space-x-2">
-          <p className="line-through opacity-60">£{price}</p>
-          <p>£{sale_price * quantity}</p>
+          <p className="line-through opacity-60">£{price * quantity}</p>
+          <div>£{sale_price * quantity}</div>
         </div>
       ) : (
         `£${price * quantity}`
@@ -93,19 +93,7 @@ const Price = ({ price, sale_price, in_stock, quantity }) => (
       'Out of Stock'
     )}
   </p>
-);
-
-const Add = ({ in_stock }) => (
-  <button
-    disabled={in_stock ? false : true}
-    className={`${
-      !in_stock &&
-      'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
-    } cursor-pointer disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
-  >
-    Add to Cart
-  </button>
-);
+)
 
 const DetailsPanel = ({
   name,
@@ -121,18 +109,15 @@ const DetailsPanel = ({
   setQuantity,
   in_stock
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState({});
-  console.log(selectedOptions);
-
   const details = {
     slug,
     name,
     quantity,
     options: selectedOptions,
-    total_amount: sale_price ? quantity * sale_price : quantity * price
-  };
+    total_price: sale_price ? quantity * sale_price : quantity * price
+  }
 
-  console.log(details);
+  const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -155,9 +140,20 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <Add in_stock={in_stock} />
+      <form action={'/api/checkout-sessions'} method="POST">
+        <button
+          onClick={addToCart}
+          disabled={in_stock ? false : true}
+          className={`${
+            !in_stock &&
+            'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
+          } cursor-pointer disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
+        >
+          Add to Cart
+        </button>
+      </form>
     </div>
-  );
-};
+  )
+}
 
-export default DetailsPanel;
+export default DetailsPanel

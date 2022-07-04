@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import sanity from 'sanity';
-import Navigation from '../navigation';
-import DetailsPanel from './details';
-import ImagesPanel from './images';
+import { useState } from 'react'
+import sanity from 'sanity'
+import Navigation from '../navigation'
+import DetailsPanel from './details'
+import ImagesPanel from './images'
 
 export const getStaticPaths = async () => {
   const products = await sanity.fetch(`
@@ -11,15 +11,15 @@ export const getStaticPaths = async () => {
       current
     }
   }
-  `);
+  `)
 
   return {
     paths: products.map(({ slug }) => ({
       params: { product: slug.current }
     })),
     fallback: false
-  };
-};
+  }
+}
 
 export const getStaticProps = async ({ params }) => {
   const res = await sanity.fetch(
@@ -29,22 +29,22 @@ export const getStaticProps = async ({ params }) => {
     }
   `,
     { product: params.product }
-  );
-  const product = res[0];
+  )
+  const product = res[0]
 
   return {
     props: {
       product
     }
-  };
-};
+  }
+}
 
 const Product = ({ product }) => {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1)
 
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex items-start justify-center space-x-4">
         <DetailsPanel
           {...product}
@@ -55,7 +55,7 @@ const Product = ({ product }) => {
         <ImagesPanel images={product.images} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

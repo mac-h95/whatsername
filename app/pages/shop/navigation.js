@@ -2,6 +2,7 @@ import Icon from 'icon';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+
 const Navigation = () => {
   const router = useRouter();
   const { pathname } = router;
@@ -20,7 +21,7 @@ const Navigation = () => {
       <Link href="/shop/checkout">
         <div className="flex items-center space-x-2 text-2xl">
           <Icon name="FiShoppingCart" provider="fi" />
-          <span>£50.00</span>
+          <span>£{cart.total_price}</span>
         </div>
       </Link>
     </nav>
