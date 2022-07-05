@@ -46,7 +46,7 @@ const Product = ({ product }) => {
   return (
     <>
       {/* <Navigation /> */}
-      <div className="flex items-start justify-center space-x-4">
+      <div className="flex-col items-start justify-center space-y-4 md:flex md:space-x-4">
         <DetailsPanel
           {...product}
           image={product.images[0]}
