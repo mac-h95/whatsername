@@ -29,6 +29,7 @@ export default async function handler(req, res) {
           allowed_countries: ['GB'],
         },
         shipping_options: [
+{
           shipping_rate_data: {
           type: 'fixed_amount',
           fixed_amount: {
