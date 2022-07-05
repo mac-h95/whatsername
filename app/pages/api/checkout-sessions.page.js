@@ -25,6 +25,50 @@ export default async function handler(req, res) {
           }
         ],
         mode: 'payment',
+        shipping_address_collection: {
+          allowed_countries: ['GB'],
+        },
+        shipping_options: [
+          shipping_rate_data: {
+          type: 'fixed_amount',
+          fixed_amount: {
+            amount: 0,
+            currency: 'gbp',
+          },
+          display_name: 'Free shipping',
+          delivery_estimate: {
+            minimum: {
+              unit: 'business_day',
+              value: 5,
+            },
+            maximum: {
+              unit: 'business_day',
+              value: 7,
+            },
+          }
+        }
+      },
+      {
+        shipping_rate_data: {
+          type: 'fixed_amount',
+          fixed_amount: {
+            amount: 1500,
+            currency: 'gbp',
+          },
+          display_name: '1st Class',
+          delivery_estimate: {
+            minimum: {
+              unit: 'business_day',
+              value: 1,
+            },
+            maximum: {
+              unit: 'business_day',
+              value: 1,
+            },
+          }
+        }
+        }
+        ],
         success_url: `${req.headers.origin}/shop/?success=true`,
         cancel_url: `${req.headers.origin}/shop/?canceled=true`
       })
