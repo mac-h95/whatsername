@@ -1,7 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js'
 import NextHead from 'next/head'
 import { urlFor } from 'sanity'
-import { useState } from 'react'
+import { useEffect } from 'react'
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -145,7 +145,12 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form action="/api/checkout-sessions" method="POST">
+      <form
+        action={`/api/checkout-sessions/?name=${name}&description=${description}&image=${urlFor(
+          image
+        )}&quantity=${quantity}&price=${sale_price ? sale_price : price}&`}
+        method="POST"
+      >
         <button
           disabled={in_stock ? false : true}
           className={`${
@@ -153,7 +158,7 @@ const DetailsPanel = ({
             'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
           } cursor-pointer disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
         >
-          Add to Cart
+          Checkout Now
         </button>
       </form>
     </div>

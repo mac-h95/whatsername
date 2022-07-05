@@ -1,8 +1,12 @@
+import { urlFor } from 'sanity'
+
 const stripe = require('stripe')(
-  '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'
+  'sk_test_51LC0NQE61EXQFmDyGQZ2HiTVIZWGWJOvWcl1D0BfUjtNnAToJkC6132PNU0uzL6prk9zUOqSi0Jpd59UeRZXQgjZ00WJcIDrPs'
 )
 
 export default async function handler(req, res) {
+  const { name, description, image, quantity, price, slug } = req.query
+
   if (req.method === 'POST') {
     try {
       const session = await stripe.checkout.sessions.create({
@@ -11,18 +15,18 @@ export default async function handler(req, res) {
             price_data: {
               currency: 'gbp',
               product_data: {
-                name: 'Test Product',
-                description: 'Test Product Description',
-                images: ['https://example.com/tshirt.png']
+                name: name,
+                description: description,
+                images: [image]
               },
-              unit_amount: 1000
+              unit_amount: price + '00'
             },
-            quantity: 5
+            quantity: quantity
           }
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true`,
-        cancel_url: `${req.headers.origin}/?canceled=true`
+        success_url: `${req.headers.origin}/shop/?success=true`,
+        cancel_url: `${req.headers.origin}/shop/?canceled=true`
       })
       res.redirect(303, session.url)
     } catch (err) {
