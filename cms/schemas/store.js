@@ -41,7 +41,7 @@ const Product = {
       of: [{ type: 'option' }]
     }
   ]
-};
+}
 
 const Category = {
   name: 'Category',
@@ -67,7 +67,7 @@ const Category = {
       of: [{ type: 'reference', to: [{ type: 'product' }] }]
     }
   ]
-};
+}
 
 const Option = {
   name: 'Option',
@@ -89,4 +89,37 @@ const Option = {
         "For custom text field options such as 'Tie Dye Colours' just write the word 'custom'"
     }
   ]
-};
+}
+
+const Order = {
+  name: 'Order',
+  title: 'Order',
+  type: 'document',
+  fields: [
+    {
+      name: 'customer',
+      title: 'Customer',
+      type: 'reference',
+      to: [{ type: 'customer' }],
+      validation: (Rule) => Rule.required()
+    },
+    {
+      name: 'products',
+      title: 'Products',
+      type: 'array',
+      of: [{ type: 'string' }]
+    },
+    {
+      name: 'fulfilled',
+      title: 'Fulfilled',
+      type: 'boolean',
+      validation: (Rule) => Rule.required()
+    },
+    {
+      name: 'address',
+      title: 'Address',
+      type: 'string',
+      validation: (Rule) => Rule.required()
+    }
+  ]
+}
