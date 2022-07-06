@@ -1,8 +1,19 @@
-const Product = {
-  name: 'Product',
+const product = {
+  name: 'product',
   title: 'Product',
   type: 'document',
   fields: [
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+        slugify: (input) =>
+          input.toLowerCase().replace(/\s+/g, '-').slice(0, 200)
+      }
+    },
     {
       name: 'name',
       title: 'Name',
@@ -14,6 +25,11 @@ const Product = {
       title: 'Price',
       type: 'number',
       validation: (Rule) => Rule.required()
+    },
+    {
+      name: 'sale_price',
+      title: 'Sale Price',
+      type: 'number'
     },
     {
       name: 'description',
@@ -38,13 +54,25 @@ const Product = {
       name: 'options',
       title: 'Options',
       type: 'array',
-      of: [{ type: 'option' }]
+      of: [{ type: 'reference', to: [{ type: 'option' }] }]
+    },
+    {
+      name: 'available_in',
+      title: 'Available in',
+      type: 'string',
+      description: 'The little bit of text that says "Available in..."'
+    },
+    {
+      name: 'in_stock',
+      title: 'In stock',
+      type: 'boolean',
+      description: 'Is this product in stock?'
     }
   ]
 }
 
-const Category = {
-  name: 'Category',
+const category = {
+  name: 'category',
   title: 'Category',
   type: 'document',
   fields: [
@@ -69,8 +97,8 @@ const Category = {
   ]
 }
 
-const Option = {
-  name: 'Option',
+const option = {
+  name: 'option',
   title: 'Option',
   type: 'document',
   fields: [
@@ -91,8 +119,8 @@ const Option = {
   ]
 }
 
-const Order = {
-  name: 'Order',
+const order = {
+  name: 'order',
   title: 'Order',
   type: 'document',
   fields: [
@@ -101,25 +129,55 @@ const Order = {
       title: 'Customer',
       type: 'reference',
       to: [{ type: 'customer' }],
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
+      readOnly: ({ document }) => !document?.publishedOnce
     },
     {
       name: 'products',
       title: 'Products',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [{ type: 'string' }],
+      readOnly: ({ document }) => !document?.publishedOnce
     },
     {
       name: 'fulfilled',
       title: 'Fulfilled',
       type: 'boolean',
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
+      readOnly: ({ document }) => !document?.publishedOnce
     },
     {
       name: 'address',
       title: 'Address',
       type: 'string',
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
+      readOnly: ({ document }) => !document?.publishedOnce
     }
   ]
 }
+
+const customer = {
+  name: 'customer',
+  title: 'Customer',
+  type: 'document',
+  fields: [
+    {
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      validation: (Rule) => Rule.required()
+    },
+    {
+      name: 'email',
+      title: 'Email',
+      type: 'string'
+    },
+    {
+      name: 'phone',
+      title: 'Phone',
+      type: 'string'
+    }
+  ]
+}
+
+export { product, category, option, order, customer }

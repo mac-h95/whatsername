@@ -1,8 +1,9 @@
-import schemaTypes from "all:part:@sanity/base/schema-type";
-import createSchema from "part:@sanity/base/schema-creator";
+import schemaTypes from 'all:part:@sanity/base/schema-type'
+import createSchema from 'part:@sanity/base/schema-creator'
 import {
   aboutPage,
-  album, blogPage,
+  album,
+  blogPage,
   contactPage,
   cta,
   event,
@@ -11,16 +12,23 @@ import {
   keyword,
   link,
   mediaPage,
-  member, photo, photographer,
+  member,
+  photo,
+  photographer,
   post,
   pronoun,
   shopPage,
+  product,
+  category,
+  option,
+  order,
+  customer,
   siteSettings,
   venue
-} from "./types";
+} from './types'
 
 export default createSchema({
-  name: "default",
+  name: 'default',
   types: schemaTypes.concat([
     // Website settings
     siteSettings,
@@ -44,9 +52,15 @@ export default createSchema({
     photo,
     // Blog
     post,
+    // Store
+    product,
+    category,
+    option,
+    order,
+    customer,
     // Utility
     keyword,
     link,
     cta
   ])
-});
+})

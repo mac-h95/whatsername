@@ -120,7 +120,38 @@ export default () =>
       S.listItem()
         .title('Shop')
         .icon(BiCartAlt)
-        .child(S.document().schemaType('shopPage').documentId('shopPage')),
+        .child(
+          S.list()
+            .title('Shop')
+            .items([
+              S.listItem()
+                .title('Page Info')
+                .icon(BiNotepad)
+                .child(
+                  S.document().schemaType('shopPage').documentId('shopPage')
+                ),
+              S.listItem()
+                .title('Products')
+                .icon(BiCartAlt)
+                .schemaType('product')
+                .child(S.documentTypeList('product').title('Products')),
+              S.listItem()
+                .title('Categories')
+                .icon(BiKey)
+                .schemaType('category')
+                .child(S.documentTypeList('category').title('Categories')),
+              S.listItem()
+                .title('Orders')
+                .icon(BiCartAlt)
+                .schemaType('order')
+                .child(S.documentTypeList('order').title('Orders')),
+              S.listItem()
+                .title('Customers')
+                .icon(BiEnvelope)
+                .schemaType('customer')
+                .child(S.documentTypeList('customer').title('Customers'))
+            ])
+        ),
       S.listItem()
         .title('Contact')
         .icon(BiEnvelope)
@@ -152,6 +183,11 @@ export default () =>
             'contactPage',
             'photographer',
             'photo',
+            'product',
+            'category',
+            'option',
+            'order',
+            'customer',
             'venue'
           ].includes(listItem.getId())
       )
