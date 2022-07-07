@@ -36,6 +36,7 @@ const Header = ({ logo, route }) => {
       <button
         className="z-50 p-0 text-3xl bg-transparent border-0 md:hidden"
         onClick={() => setVisible(!visible)}
+        name="menu"
       >
         <Icon name="HiMenuAlt3" provider="hi" />
       </button>
