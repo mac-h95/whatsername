@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { urlFor } from 'sanity'
 
 const Thumbnails = ({ images, currentIndex, setIndex }) => (
-  <div className="flex flex-col space-y-2">
+  <div className="flex md:flex-col md:space-y-2">
     {images.map((image, index) => (
       <div
         key={image.asset._ref}
-        className={`flex items-center justify-center cursor-pointer ${
+        className={`flex items-center ml-2 md:ml-0 justify-center cursor-pointer ${
           index === currentIndex && 'border-2 border-primary-500'
         }`}
         onClick={() => setIndex(index)}

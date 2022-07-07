@@ -19,7 +19,7 @@ const Head = ({ name, description, category, image }) => (
 
 const Details = ({ name, available_in, description }) => (
   <>
-    <h1 className="text-4xl font-bold">{name}</h1>
+    <h1 className="text-4xl font-bold mt-8">{name}</h1>
     <p className="font-bold">{available_in}</p>
     <p className="prose normal-case text-foreground-500">{description}</p>
   </>
