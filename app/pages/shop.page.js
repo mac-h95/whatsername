@@ -32,7 +32,7 @@ export const Shop = ({ heading, products }) => {
   return (
     <>
       <Heading heading={heading} />
-      <Navigation />
+      {/* <Navigation /> */}
       <List products={products} />
     </>
   )

@@ -43,10 +43,9 @@ const Product = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
   const [selectedOptions, setSelectedOptions] = useState([])
 
-
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex items-start justify-center space-x-4">
         <DetailsPanel
           {...product}
