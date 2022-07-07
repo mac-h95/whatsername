@@ -1,6 +1,4 @@
-const stripe = require('stripe')(
-  'sk_test_51LC0NQE61EXQFmDyGQZ2HiTVIZWGWJOvWcl1D0BfUjtNnAToJkC6132PNU0uzL6prk9zUOqSi0Jpd59UeRZXQgjZ00WJcIDrPs'
-)
+const stripe = require('stripe')(process.env.STRIPE_PUBLISHABLE_KEY)
 
 export default async function handler(req, res) {
   const { name, description, image, quantity, price } = req.query
