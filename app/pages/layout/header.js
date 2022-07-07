@@ -1,25 +1,25 @@
-import Icon from 'icon';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { urlFor } from 'sanity';
-import Navigation from './navigation';
+import Icon from 'icon'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { urlFor } from 'sanity'
+import Navigation from './navigation'
 
 const Header = ({ logo, route }) => {
-  const [visible, setVisible] = useState(false);
-  const [width, setWidth] = useState();
+  const [visible, setVisible] = useState(false)
+  const [width, setWidth] = useState()
 
   useEffect(() => {
-    setWidth(window.innerWidth);
+    setWidth(window.innerWidth)
 
     const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
+      setWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  });
+      window.removeEventListener('resize', handleResize)
+    }
+  })
 
   return (
     <header className="flex items-center justify-between w-screen px-6 py-2 mb-3 md:py-6 md:px-10">
@@ -33,12 +33,12 @@ const Header = ({ logo, route }) => {
           />
         </a>
       </Link>
-      <a
-        className="z-50 text-3xl md:hidden"
+      <button
+        className="z-50 p-0 text-3xl bg-transparent border-0 md:hidden"
         onClick={() => setVisible(!visible)}
       >
         <Icon name="HiMenuAlt3" provider="hi" />
-      </a>
+      </button>
       {width > 768 && <Navigation route={route} setVisible={setVisible} />}
       {width < 768 && (
         <Navigation
@@ -49,7 +49,7 @@ const Header = ({ logo, route }) => {
         />
       )}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
