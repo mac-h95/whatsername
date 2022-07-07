@@ -14,7 +14,7 @@ const handler = async (req, res) => {
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object
-
+      console.log(JSON.stringify(paymentIntent))
       const mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
@@ -22,22 +22,19 @@ const handler = async (req, res) => {
         text: `
           New Order from Whatsername's Store
           Name: ${paymentIntent.shipping.name}
-          Email:
-          Phone: ${paymentIntent.shipping.phone}
+          Email: ${paymentIntent.charges.data[0].billing_details.email}
           Address: ${paymentIntent.shipping.address.line1},
                    ${paymentIntent.shipping.address.line2}
                    ${paymentIntent.shipping.address.city},
                    ${paymentIntent.shipping.address.postal_code}
-          <a href='${paymentIntent.charges.receipt_url}'><button>View Order</button></a>
+          Order URL: ${paymentIntent.charges.data[0].receipt_url}
         `
       }
 
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
-          console.log(err)
           res.status(500).send(err)
         } else {
-          console.log(data)
           res.status(200).end()
         }
       })

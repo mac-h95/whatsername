@@ -4,13 +4,15 @@ import '@fontsource/poppins/900.css'
 import Layout from 'layout'
 import sanity from 'sanity'
 import './utility/global.css'
+import { CartProvider, useCart } from './shop/cart'
+import { useContext } from 'react'
 
 const MyApp = ({ Component, pageProps, siteSettings }) => (
   <Layout siteSettings={siteSettings}>
     <Component {...pageProps} />
   </Layout>
 )
-2
+
 export default MyApp
 
 MyApp.getInitialProps = async () => {
