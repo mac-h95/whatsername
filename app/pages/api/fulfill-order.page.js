@@ -14,7 +14,6 @@ const handler = async (req, res) => {
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object
-      console.log(JSON.stringify(paymentIntent))
       const mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,

@@ -1,12 +1,12 @@
-import Icon from 'icon';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
+import Icon from 'icon'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useCart } from './cart'
 
 const Navigation = () => {
-  const router = useRouter();
-  const { pathname } = router;
-
+  const router = useRouter()
+  const { pathname } = router
+  console.log(useCart().cart)
   return (
     <nav className="flex items-center justify-between w-screen px-16 mb-16 text-3xl">
       {pathname === '/shop' ? (
@@ -21,11 +21,11 @@ const Navigation = () => {
       <Link href="/shop/checkout">
         <div className="flex items-center space-x-2 text-2xl">
           <Icon name="FiShoppingCart" provider="fi" />
-          <span>£{cart.total_price}</span>
+          <span>{useCart().length}</span>
         </div>
       </Link>
     </nav>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation
