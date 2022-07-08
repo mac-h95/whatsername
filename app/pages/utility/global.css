@@ -65,7 +65,12 @@
 
   .input {
     @apply w-full px-3 py-1 border-0 border-b-2 bg-transparent border-gray-200  focus:outline-none focus:ring-0 focus:border-primary-600;
+    
+    &.primary {
+      @apply rounded-none;
+    }
   }
+
   .lds-ring {
     display: inline-block;
     position: relative;
