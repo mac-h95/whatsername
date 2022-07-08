@@ -156,7 +156,7 @@ const DetailsPanel = ({
           className={`${
             !in_stock &&
             'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
-          } cursor-pointer disabled:hover:opacity-60 disabled:hover:bg-primary-500 disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
+          } cursor-pointer disabled:hover:opacity-60 disabled:hover:bg-primary-500 disabled:active:opacity-60 disabled:active:bg-primary-500 disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
         >
           Checkout Now
         </button>
