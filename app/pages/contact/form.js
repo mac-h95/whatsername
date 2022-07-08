@@ -14,7 +14,7 @@ const Form = () => (
     </div>
     <div className='my-2'>
       <label className='block text-sm font-bold' for='message'>Message</label>
-      <textarea className='w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500' name='name' />
+      <textarea className='w-4/5 h-2/3 bg-transparent border-0 border-b-2 focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500' name='name' />
     </div>
     <input className='button primary' type='submit' value='Send' />
   </form>
