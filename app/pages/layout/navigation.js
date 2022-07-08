@@ -7,7 +7,7 @@ const Item = ({ href, name, route, nounderline, setVisible }) => {
     return (
       <>
         <li
-          className="hover:border-b-2 border-primary-500"
+          className="md:hover:border-b-2 border-primary-500"
           onClick={() => setVisible(false)}
         >
           <Link href="/contact">
