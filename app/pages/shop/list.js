@@ -22,7 +22,7 @@ const Product = ({
         onMouseEnter={() => (images[1] ? setIndex(1) : null)}
         onMouseLeave={() => setIndex(0)}
       >
-        <div className="group-hover:scale-105">
+        <div className="md:group-hover:scale-105">
           <Image
             src={urlFor(images[index])}
             alt={name}

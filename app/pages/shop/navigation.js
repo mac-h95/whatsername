@@ -8,20 +8,26 @@ const Navigation = () => {
   const { pathname } = router
   console.log(useCart().cart)
   return (
-    <nav className="flex items-center justify-between w-screen px-16 mb-16 text-3xl">
+    <nav className="flex items-center justify-between w-screen text-3xl md:mb-16 md:px-16">
       {pathname === '/shop' ? (
         <div className="flex-1" />
       ) : (
         <Link href="/shop">
-          <a>
-            <Icon name="FiArrowLeft" provider="fi" />
-          </a>
-        </Link>
+        <a className="text-primary-500 hover:text-primary-600">
+          <span className='flex items-center space-x-2 text-sm'>
+            <span className='text-2xl'>
+              <Icon name='FiChevronLeft' provider='fi'/> 
+            </span>
+            Back
+          </span>
+          
+        </a>
+      </Link>
       )}
       <Link href="/shop/checkout">
         <div className="flex items-center space-x-2 text-2xl">
-          <Icon name="FiShoppingCart" provider="fi" />
-          <span>{useCart().length}</span>
+      {/*    <Icon name="FiShoppingCart" provider="fi" />
+      <span>{useCart().length}</span>*/}
         </div>
       </Link>
     </nav>
