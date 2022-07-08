@@ -54,7 +54,7 @@ const Product = ({
 }
 
 const List = ({ products }) => (
-  <div className="flex flex-col items-center justify-center w-screen space-x-6 md:flex-row ">
+  <div className="flex flex-col items-center justify-center w-screen space-y-4 md:space-y-0 md:space-x-6 md:flex-row ">
     {products.map((product) => (
       <Product {...product} key={product.slug} />
     ))}
