@@ -1,4 +1,4 @@
-import { contactPageFetch } from './index/data';
+import { contactPageFetch } from './contact/data';
 import Heading from './utility/heading';
 
 export const getStaticProps = async () => {
