@@ -6,15 +6,15 @@ const Form = () => (
     </div>
       <div className='my-2'>
       <label className='block text-sm font-bold' for='email'>Email</label>
-      <input name='email' type='email' />
+      <input className='w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500' name='email' type='email' />
     </div>
     <div className='my-2'>
       <label className='block text-sm font-bold' for='subject'>Subject</label>
-      <input name='subject' type='text' />
+      <input className='w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500' name='subject' type='text' />
     </div>
     <div className='my-2'>
       <label className='block text-sm font-bold' for='message'>Message</label>
-      <textarea name='name' />
+      <textarea className='w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500' name='name' />
     </div>
   </form>
 )
