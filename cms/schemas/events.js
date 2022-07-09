@@ -37,7 +37,9 @@ const event = {
     {
       name: 'tickets',
       title: 'Tickets',
-      type: 'string'
+      type: 'string',
+      description: 'The URL for the event\'s ticketing page. If a free event with no tickets just add "#" or the url to the facebook event',
+      validation: Rule => Rule.required(),
     }
   ]
 };

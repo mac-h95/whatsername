@@ -12,7 +12,7 @@ const Event = ({ tickets, image, title, venue, date }) => (
     >
       <Image src={urlFor(image)} alt={title} width={260} height={260} />
       <div className="text-center">
-        <h3 className="font-semibold">{title}</h3>
+        <h3 className="max-w-[60%] mx-auto font-semibold">{title}</h3>
         <small>
           {venue.name}, {getDateString(date)}
         </small>
