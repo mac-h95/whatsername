@@ -9,18 +9,19 @@ const transporter = nodemailer.createTransport({
 })
 
 const handler = async (req, res) => {
-  const {name, email, subject, message} = req.body;
+  const { name, email, subject, message } = req.body
   const mailOptions = {
-        from: process.env.EMAIL,
-        to: process.env.EMAIL,
-        subject: 'New Message from Whatsername Site',
-        text: `
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: 'New Message from Whatsername Site',
+    text: `
          Message from: ${name}, ${email}
          Subject: ${subject}
          Content below:
          ${message}
         `
-      }
+  }
+  res.status(200).send('Message sent!')
 }
 
-export default Handler
+export default handler
