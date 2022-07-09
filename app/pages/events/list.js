@@ -6,13 +6,13 @@ import { urlFor } from "sanity";
 const Event = ({ tickets, image, title, venue, date }) => (
   <Link href={tickets} passHref>
     <a
-      className="flex flex-col items-center justify-center space-y-2 md:my-9 md:mr-9"
+      className="flex flex-col items-center justify-center space-y-2 w-[279.5px]"
       target="_blank"
       rel="noopener"
     >
       <Image src={urlFor(image)} alt={title} width={260} height={260} />
       <div className="text-center">
-        <h3 className="max-w-[60%] mx-auto font-semibold">{title}</h3>
+        <h3 className="font-semibold">{title}</h3>
         <small>
           {venue.name}, {getDateString(date)}
         </small>
@@ -40,7 +40,7 @@ const EventsList = ({ events }) => {
         <h2 className="mb-3 text-2xl font-semibold tracking-widest text-center md:text-left md:flex-wrap text-background-300">
           Past Events
         </h2>
-        <div className="flex flex-col items-center space-y-8 md:justify-start md:space-y-0 md:flex-wrap md:flex-row ">
+        <div className="flex flex-col items-center space-y-8 md:items-start md:justify-start md:space-y-0 md:flex-wrap md:flex-row ">
           {pastEvents.map((event) => (
             <Event key={event._id} {...event} />
           ))}
