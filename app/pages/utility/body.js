@@ -2,16 +2,22 @@ import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 
 const BodyText = ({ value }) => {
-  const serializers = {
+  const components = {
     marks: {
-      internalLink: ({ mark, children }) => (
-        <Link href={`/blog/posts/${mark.slug.current}`}>
-          <a>{children}</a>
-        </Link>
-      ),
-      externalLink: ({ mark, children }) => (
-        <Link href={mark.url}>
-          <a>{children}</a>
+      internalLink: ({ children }) => {
+        return (
+          <Link href={`/blog/posts/`}>
+            <a className="text-foreground-500 hover:text-primary-500">
+              {children}
+            </a>
+          </Link>
+        )
+      },
+      externalLink: ({ children, value }) => (
+        <Link href={value.url}>
+          <a className="text-foreground-500 hover:text-primary-500">
+            {children}
+          </a>
         </Link>
       )
     }
@@ -19,7 +25,7 @@ const BodyText = ({ value }) => {
 
   return (
     <div className="max-w-[85vw] prose mx-auto normal-case text-foreground-500 md:max-w-prose snap-center mb-8">
-      <PortableText value={value} serializers={serializers} />
+      <PortableText value={value} components={components} />
     </div>
   )
 }
