@@ -27,7 +27,7 @@ const Thumbnails = ({ images, currentIndex, setIndex }) => (
 )
 
 const MainImage = ({ image }) => (
-  <Image src={urlFor(image)} alt={image.alt} width={500} height={500} />
+  <Image src={urlFor(image)} alt={image.alt} width={500} height={500} placeholder="blur" blurDataUrl="https://whatsername.vercel.app/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F878j5f8u%2Fproduction%2Fbf266e94bfc6a4e9c9ce4ae33b3559870b98bb09-750x938.jpg&w=1080&q=75" />
 )
 
 const ImagesPanel = ({ images }) => {
