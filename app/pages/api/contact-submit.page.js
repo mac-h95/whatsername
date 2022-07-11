@@ -13,7 +13,7 @@ const handler = async (req, res) => {
   const mailOptions = {
     from: process.env.EMAIL,
     to: process.env.EMAIL,
-    subject: 'New Message from Whatsername Site',
+    subject: `New Message from ${name}, sent via the Whatsername Site.`,
     text: `
          Message from: ${name}, ${email}
          Subject: ${subject}
@@ -21,7 +21,13 @@ const handler = async (req, res) => {
          ${message}
         `
   }
-  res.status(200).send('Message sent!')
+  transporter.sendMail(mailOptions, (err) => {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).end()
+    }
+  })
 }
 
 export default handler

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import LoadingSpinner from 'pages/utility/spinner'
+import Icon from 'icon'
 
 const Form = () => {
   const [formInput, setFormInput] = useState({
@@ -8,19 +10,24 @@ const Form = () => {
     message: ''
   })
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const [mailSent, setMailSent] = useState('unsent')
 
-    fetch('/api/contact-submit', {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await setMailSent('loading')
+
+    await fetch('/api/contact-submit', {
       method: 'POST',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        formInput
+        ...formInput
       })
     }).then((res) => {
       console.log(res)
+      res.status === 200 ? setMailSent('sent') : setMailSent('error')
     })
   }
 
@@ -37,6 +44,7 @@ const Form = () => {
           className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500"
           name="name"
           type="text"
+          required
           onChange={(e) => setFormInput({ ...formInput, name: e.target.value })}
         />
       </div>
@@ -48,6 +56,7 @@ const Form = () => {
           className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500"
           name="email"
           type="email"
+          required
           onChange={(e) =>
             setFormInput({ ...formInput, email: e.target.value })
           }
@@ -61,6 +70,7 @@ const Form = () => {
           className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500"
           name="subject"
           type="text"
+          required
           onChange={(e) =>
             setFormInput({ ...formInput, subject: e.target.value })
           }
@@ -74,12 +84,33 @@ const Form = () => {
           rows="3"
           className="bg-transparent border-0 border-b-2 resize-none focus:ring-0 focus:border-primary-500 focus:outline-0 border-foreground-500"
           name="name"
+          required
           onChange={(e) =>
             setFormInput({ ...formInput, message: e.target.value })
           }
         />
       </div>
-      <input className="button primary" type="submit" value="Send" />
+      <button
+        className={`button primary bg-primary-500 border-primary-500 text-background-500 ${
+          mailSent === 'sent' && 'bg-green-400'
+        } ${mailSent === 'error' && 'bg-red-400'}`}
+        type="submit"
+      >
+        <span className="flex items-center space-x-2">
+          {mailSent === 'loading' && <>Sending</>}
+          {mailSent === 'sent' && (
+            <span className="text-xl">
+              <Icon name="FiCheckCircle" provider="fi" />
+            </span>
+          )}
+          {mailSent === 'error' && (
+            <span className="text-xl">
+              <Icon name="FiXCircle" provider="fi" />
+            </span>
+          )}
+          {mailSent === 'unsent' && 'Send'}
+        </span>
+      </button>
     </form>
   )
 }
