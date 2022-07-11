@@ -24,7 +24,7 @@ const Header = ({ title, metadata, cover, date }) => (
     <MetaData title={title} metadata={metadata} />
     <div className="relative flex flex-col items-center max-w-sm px-4 mt-8 mb-10 space-y-2 md:px-16 md:max-w-none md:items-start">
       <Link href="/blog">
-        <a className="absolute -left-10 md:-left-2 md:top-0 -top-8 text-primary-500 hover:text-primary-600">
+        <a className="absolute left-0 md:-left-2 md:top-0 -top-8 text-primary-500 hover:text-primary-600">
           <span className="flex items-center space-x-2 text-sm">
             <span className="text-2xl">
               <Icon name="FiChevronLeft" provider="fi" />
