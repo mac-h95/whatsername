@@ -11,6 +11,7 @@ const Form = () => {
   })
 
   const [mailSent, setMailSent] = useState('unsent')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,7 +28,10 @@ const Form = () => {
       })
     }).then((res) => {
       console.log(res)
-      res.status === 200 ? setMailSent('sent') : setMailSent('error')
+      res.status === 200
+        ? (setMailSent('sent'),
+          setFormInput({ name: '', email: '', subject: '', message: '' }))
+        : (setMailSent('error'), setError(res.statusText))
     })
   }
 
@@ -91,9 +95,29 @@ const Form = () => {
         />
       </div>
       <button
-        className={`button primary bg-primary-500 border-primary-500 text-background-500 ${
-          mailSent === 'sent' && 'bg-green-400'
-        } ${mailSent === 'error' && 'bg-red-400'}`}
+        className={`
+        text-background-500
+        ${
+          mailSent === 'unsent'
+            ? 'bg-primary-500 border-primary-500 active:bg-primary-500 active:border-primary-500'
+            : ''
+        }
+        ${
+          mailSent === 'sent'
+            ? 'bg-green-400 border-green-400 active:bg-green-400 active:border-green-400'
+            : ''
+        }
+        ${
+          mailSent === 'error'
+            ? 'bg-red-400 border-red-400 active:bg-red-400 active:border-red-400'
+            : ''
+        }
+        ${
+          mailSent === 'sending'
+            ? 'bg-primary-200 border-primary-200 text-background-200'
+            : ''
+        }
+        `}
         type="submit"
       >
         <span className="flex items-center space-x-2">
@@ -111,6 +135,7 @@ const Form = () => {
           {mailSent === 'unsent' && 'Send'}
         </span>
       </button>
+      {mailSent === 'error' && <p className="text-sm text-red-500">{error}</p>}
     </form>
   )
 }
