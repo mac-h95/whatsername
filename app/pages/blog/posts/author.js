@@ -12,8 +12,8 @@ const Author = ({ link, name, image, role }) => (
       <Image
         src={urlFor(image)}
         alt={name}
-        width={100}
-        height={100}
+        width={80}
+        height={80}
         style={{ borderRadius: '50%' }}
       />
       <div className="flex flex-col text-left w-3/5">
