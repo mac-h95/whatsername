@@ -14,8 +14,8 @@ const BodyText = ({ value }) => {
         )
       },
       externalLink: ({ children, value }) => (
-        <Link href={value.url}>
-          <a className="text-foreground-500 hover:text-primary-500">
+        <Link href={value.url} passHref>
+          <a className="text-foreground-500 hover:text-primary-500" target="_blank" rel="noopener">
             {children}
           </a>
         </Link>
