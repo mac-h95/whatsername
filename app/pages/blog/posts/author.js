@@ -16,7 +16,7 @@ const Author = ({ link, name, image, role }) => (
         height={100}
         style={{ borderRadius: '50%' }}
       />
-      <div className="flex flex-col text-left max-w-md">
+      <div className="flex flex-col text-left w-3/5">
         <span className="font-bold">{name}</span>
         <span>{role}</span>
       </div>
