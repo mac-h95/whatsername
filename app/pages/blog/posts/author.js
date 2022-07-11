@@ -18,7 +18,7 @@ const Author = ({ link, name, image, role }) => (
       />
       <div className="flex flex-col text-left">
         <span className="font-bold">{name}</span>
-        <span>{role}</span>
+        <span className="max-w-md">{role}</span>
       </div>
     </a>
   </Link>
