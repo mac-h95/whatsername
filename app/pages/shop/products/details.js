@@ -148,7 +148,7 @@ const DetailsPanel = ({
       <form
         action={`/api/checkout-sessions/?name=${name}&description=${description}&image=${urlFor(
           image
-        )}&quantity=${quantity}&price=${sale_price ? sale_price : price}&`}
+        )}&quantity=${quantity}&price=${sale_price ? sale_price : price}&options=${options}`}
         method="POST"
       >
         <button
