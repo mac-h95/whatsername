@@ -12,7 +12,7 @@ export default async function handler(req, res) {
               currency: 'gbp',
               product_data: {
                 name: name,
-                description: description + JSON.stringify(options),
+                description: description + JSON.stringify(...options),
                 images: [image]
               },
               unit_amount: price + '00'
