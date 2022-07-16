@@ -1,7 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 export default async function handler(req, res) {
-  const { name, description, image, quantity, price } = req.query
+  const { name, description, image, quantity, price, options } = req.query
 
   if (req.method === 'POST') {
     try {
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
               currency: 'gbp',
               product_data: {
                 name: name,
-                description: description,
+                description: description + JSON.stringify(options),
                 images: [image]
               },
               unit_amount: price + '00'
