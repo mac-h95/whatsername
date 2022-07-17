@@ -152,14 +152,7 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form
-        action={`/api/checkout-sessions/?name=${name}&description=${description}&image=${urlFor(
-          image
-        )}&quantity=${quantity}&price=${
-          sale_price ? sale_price : price
-        }&options=${options}`}
-        method="POST"
-      >
+      <form>
         <button
           disabled={in_stock ? false : true}
           className={`${
