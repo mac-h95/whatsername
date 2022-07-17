@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import LoadingSpinner from 'pages/utility/spinner'
-import Icon from 'icon'
+import { useState } from 'react';
+import LoadingSpinner from 'pages/utility/spinner';
+import Icon from 'icon';
 
 const Form = () => {
   const [formInput, setFormInput] = useState({
@@ -8,14 +8,14 @@ const Form = () => {
     email: '',
     subject: '',
     message: ''
-  })
+  });
 
-  const [mailSent, setMailSent] = useState('unsent')
-  const [error, setError] = useState('')
+  const [mailSent, setMailSent] = useState('unsent');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await setMailSent('loading')
+    e.preventDefault();
+    await setMailSent('loading');
 
     await fetch('/api/contact-submit', {
       method: 'POST',
@@ -27,13 +27,13 @@ const Form = () => {
         ...formInput
       })
     }).then((res) => {
-      console.log(res)
+      console.log(res);
       res.status === 200
         ? (setMailSent('sent'),
           setFormInput({ name: '', email: '', subject: '', message: '' }))
-        : (setMailSent('error'), setError(res.statusText))
-    })
-  }
+        : (setMailSent('error'), setError(res.statusText));
+    });
+  };
 
   return (
     <form
@@ -137,7 +137,7 @@ const Form = () => {
       </button>
       {mailSent === 'error' && <p className="text-sm text-red-500">{error}</p>}
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

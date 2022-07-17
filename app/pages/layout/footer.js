@@ -1,7 +1,7 @@
-import Icon from 'icon'
-import Image from 'next/image'
-import Link from 'next/link'
-import { urlFor } from 'sanity'
+import Icon from 'icon';
+import Image from 'next/image';
+import Link from 'next/link';
+import { urlFor } from 'sanity';
 
 const Footer = ({ logo, socialMedia }) => (
   <footer className="flex flex-col items-center justify-center w-screen px-4 py-2 mt-6 space-y-4">
@@ -42,6 +42,6 @@ const Footer = ({ logo, socialMedia }) => (
       .
     </small>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

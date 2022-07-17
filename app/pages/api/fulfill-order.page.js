@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -6,14 +6,14 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL,
     pass: process.env.PASS
   }
-})
+});
 
 const handler = async (req, res) => {
-  const event = req.body
+  const event = req.body;
 
   switch (event.type) {
     case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object
+      const paymentIntent = event.data.object;
       const mailOptions = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
@@ -28,24 +28,24 @@ const handler = async (req, res) => {
                    ${paymentIntent.shipping.address.postal_code}
           Order URL: ${paymentIntent.charges.data[0].receipt_url}
         `
-      }
+      };
 
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
-          res.status(500).send(err)
+          res.status(500).send(err);
         } else {
-          res.status(200).end()
+          res.status(200).end();
         }
-      })
-      break
+      });
+      break;
     case 'payment_method.attached':
-      const paymentMethod = event.data.object
-      console.log('PaymentMethod was attached to a Customer!')
-      break
+      const paymentMethod = event.data.object;
+      console.log('PaymentMethod was attached to a Customer!');
+      break;
     default:
-      console.log(`Unhandled event type ${event.type}`)
-      res.status(200).end()
+      console.log(`Unhandled event type ${event.type}`);
+      res.status(200).end();
   }
-}
+};
 
-export default handler
+export default handler;

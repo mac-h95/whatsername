@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prettier": {
+    "trailingComma": "none",
+    "singleQuote": true,
+    "semi": true
+  },
   "author": "https://github.com/mac-h95",
   "license": "UNLICENSED",
   "dependencies": {

@@ -1,7 +1,6 @@
-import { loadStripe } from '@stripe/stripe-js'
-import NextHead from 'next/head'
-import { urlFor } from 'sanity'
-import { useEffect } from 'react'
+import { loadStripe } from '@stripe/stripe-js';
+import NextHead from 'next/head';
+import { urlFor } from 'sanity';
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -15,54 +14,56 @@ const Head = ({ name, description, category, image }) => (
     <meta name="og:keywords" content={category}></meta>
     <meta name="og:image" content={urlFor(image)}></meta>
   </NextHead>
-)
+);
 
 const Details = ({ name, available_in, description }) => (
   <>
-    <h1 className="text-4xl font-bold mt-8">{name}</h1>
+    <h1 className="mt-8 text-4xl font-bold">{name}</h1>
     <p className="font-bold">{available_in}</p>
     <p className="prose normal-case text-foreground-500">{description}</p>
   </>
-)
+);
 
-const Options = ({ options, selectedOptions, setSelectedOptions }) => (
-  <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
-    {options.map((option) => (
-      <div key={option.name}>
-        <label className="block text-sm font-bold">{option.name}</label>
-        {option.values[0] === 'custom' ? (
-          <input
-            type="text"
-            className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-            onChange={(e) =>
-              setSelectedOptions({
-                ...selectedOptions,
-                [option.name]: e.target.value
-              })
-            }
-          />
-        ) : (
-          <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
-            {option.values.map((value) => (
-              <option
-                key={value}
-                className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-                onChange={(e) =>
-                  setSelectedOptions({
-                    ...selectedOptions,
-                    [option.name]: value
-                  })
-                }
-              >
-                {value}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-    ))}
-  </div>
-)
+const Options = ({ options, selectedOptions, setSelectedOptions }) => {
+  return (
+    <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
+      {options.map((option) => (
+        <div key={option.name}>
+          <label className="block text-sm font-bold">{option.name}</label>
+          {option.values[0] === 'custom' ? (
+            <input
+              type="text"
+              className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+              onChange={(e) =>
+                setSelectedOptions({
+                  ...selectedOptions,
+                  [option.name]: e.target.value
+                })
+              }
+            />
+          ) : (
+            <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
+              {option.values.map((value) => (
+                <option
+                  key={value}
+                  className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+                  onChange={(e) =>
+                    setSelectedOptions({
+                      ...selectedOptions,
+                      [option.name]: value
+                    })
+                  }
+                >
+                  {value}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const Quantity = ({ quantity, setQuantity }) => (
   <div className="flex items-center justify-center mx-auto space-x-4">
@@ -77,7 +78,7 @@ const Quantity = ({ quantity, setQuantity }) => (
       +
     </span>
   </div>
-)
+);
 
 const Price = ({ price, sale_price, in_stock, quantity }) => (
   <p className={`text-4xl font-bold ${!in_stock && 'text-red-500'}`}>
@@ -94,7 +95,7 @@ const Price = ({ price, sale_price, in_stock, quantity }) => (
       'Out of Stock'
     )}
   </p>
-)
+);
 
 const DetailsPanel = ({
   name,
@@ -118,11 +119,11 @@ const DetailsPanel = ({
     quantity,
     options: selectedOptions,
     total_price: sale_price ? quantity * sale_price : quantity * price
-  }
+  };
 
   const stripePromise = loadStripe(
     'pk_live_51LC0NQE61EXQFmDyGXks8Ozy2pIcVepTL3GKwx9yMUhOhLk1rxZUj2EuXZmHTy8GLpTkPuCyO2asIbrpOPp5AhcL00zei3gFck'
-  )
+  );
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -148,7 +149,9 @@ const DetailsPanel = ({
       <form
         action={`/api/checkout-sessions/?name=${name}&description=${description}&image=${urlFor(
           image
-        )}&quantity=${quantity}&price=${sale_price ? sale_price : price}&options=${options}`}
+        )}&quantity=${quantity}&price=${
+          sale_price ? sale_price : price
+        }&options=${options}`}
         method="POST"
       >
         <button
@@ -162,7 +165,7 @@ const DetailsPanel = ({
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default DetailsPanel
+export default DetailsPanel;

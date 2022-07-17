@@ -1,10 +1,10 @@
-import '@fontsource/poppins'
-import '@fontsource/poppins/700.css'
-import '@fontsource/poppins/900.css'
-import Layout from 'layout'
-import sanity from 'sanity'
-import './utility/global.css'
-import { CartProvider } from './shop/cart'
+import '@fontsource/poppins';
+import '@fontsource/poppins/700.css';
+import '@fontsource/poppins/900.css';
+import Layout from 'layout';
+import sanity from 'sanity';
+import './utility/global.css';
+import { CartProvider } from './shop/cart';
 
 const MyApp = ({ Component, pageProps, siteSettings }) => (
   <CartProvider>
@@ -12,11 +12,11 @@ const MyApp = ({ Component, pageProps, siteSettings }) => (
       <Component {...pageProps} />
     </Layout>
   </CartProvider>
-)
+);
 
-export default MyApp
+export default MyApp;
 
 MyApp.getInitialProps = async () => {
-  const siteSettings = await sanity.getDocument('siteSettings')
-  return { siteSettings }
-}
+  const siteSettings = await sanity.getDocument('siteSettings');
+  return { siteSettings };
+};

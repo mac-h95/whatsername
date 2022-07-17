@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import { urlFor } from 'sanity'
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { urlFor } from 'sanity';
 
 const Product = ({
   slug,
@@ -12,7 +12,7 @@ const Product = ({
   price,
   sale_price
 }) => {
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0);
   return (
     <Link href={`/shop/products/${slug.current}`} key={slug}>
       <a
@@ -50,8 +50,8 @@ const Product = ({
         </div>
       </a>
     </Link>
-  )
-}
+  );
+};
 
 const List = ({ products }) => (
   <div className="flex flex-col items-center justify-center w-screen space-y-4 md:space-y-0 md:space-x-6 md:flex-row ">
@@ -59,6 +59,6 @@ const List = ({ products }) => (
       <Product {...product} key={product.slug} />
     ))}
   </div>
-)
+);
 
-export default List
+export default List;

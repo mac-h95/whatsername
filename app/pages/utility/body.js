@@ -1,18 +1,18 @@
-import { PortableText } from '@portabletext/react'
-import Link from 'next/link'
+import { PortableText } from '@portabletext/react';
+import Link from 'next/link';
 
 const BodyText = ({ value }) => {
   const components = {
     marks: {
       internalLink: ({ children, value }) => {
-        console.log(value)
+        console.log(value);
         return (
           <Link href={`/blog/posts/`}>
             <a className="text-foreground-500 hover:text-primary-500">
               {children}
             </a>
           </Link>
-        )
+        );
       },
       externalLink: ({ children, value }) => (
         <Link href={value.url} passHref>
@@ -26,12 +26,12 @@ const BodyText = ({ value }) => {
         </Link>
       )
     }
-  }
+  };
 
   return (
     <div className="max-w-[85vw] prose mx-auto normal-case text-foreground-500 md:max-w-prose snap-center mb-8">
       <PortableText value={value} components={components} />
     </div>
-  )
-}
-export default BodyText
+  );
+};
+export default BodyText;

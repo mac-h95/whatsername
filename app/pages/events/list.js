@@ -1,7 +1,7 @@
-import { getDateString } from "date";
-import Image from "next/image";
-import Link from "next/link";
-import { urlFor } from "sanity";
+import { getDateString } from 'date';
+import Image from 'next/image';
+import Link from 'next/link';
+import { urlFor } from 'sanity';
 
 const Event = ({ tickets, image, title, venue, date }) => (
   <Link href={tickets} passHref>

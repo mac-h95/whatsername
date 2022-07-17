@@ -1,9 +1,9 @@
-import { getFullDateString } from 'date'
-import Icon from 'icon'
-import NextHead from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import { urlFor } from 'sanity'
+import { getFullDateString } from 'date';
+import Icon from 'icon';
+import NextHead from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import { urlFor } from 'sanity';
 
 const MetaData = ({ title, metadata }) => (
   <NextHead>
@@ -17,7 +17,7 @@ const MetaData = ({ title, metadata }) => (
     <meta name="og:keywords" content={metadata.description}></meta>
     <meta name="og:image" content={urlFor(metadata.image)}></meta>
   </NextHead>
-)
+);
 
 const Header = ({ title, metadata, cover, date }) => (
   <>
@@ -55,6 +55,6 @@ const Header = ({ title, metadata, cover, date }) => (
       </div>
     </div>
   </>
-)
+);
 
-export default Header
+export default Header;
