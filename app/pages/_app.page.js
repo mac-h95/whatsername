@@ -3,8 +3,8 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/900.css';
 import Layout from 'layout';
 import sanity from 'sanity';
+import { CartProvider } from './shop/context';
 import './utility/global.css';
-import { CartProvider } from './shop/cart';
 
 const MyApp = ({ Component, pageProps, siteSettings }) => (
   <CartProvider>

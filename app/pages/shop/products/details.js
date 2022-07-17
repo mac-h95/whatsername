@@ -25,6 +25,12 @@ const Details = ({ name, available_in, description }) => (
 );
 
 const Options = ({ options, selectedOptions, setSelectedOptions }) => {
+  console.log(
+    options.map((name, values) => {
+      name, values[0];
+    })
+  );
+
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
       {options.map((option) => (
@@ -122,7 +128,7 @@ const DetailsPanel = ({
   };
 
   const stripePromise = loadStripe(
-    'pk_live_51LC0NQE61EXQFmDyGXks8Ozy2pIcVepTL3GKwx9yMUhOhLk1rxZUj2EuXZmHTy8GLpTkPuCyO2asIbrpOPp5AhcL00zei3gFck'
+    'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
   );
 
   return (

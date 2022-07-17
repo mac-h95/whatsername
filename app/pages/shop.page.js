@@ -1,8 +1,8 @@
 import Heading from 'heading';
+import { useEffect } from 'react';
 import { shopPageFetch } from './shop/data';
 import List from './shop/list';
 import Navigation from './shop/navigation';
-import { useEffect } from 'react';
 
 export const getStaticProps = async () => {
   const { heading, products } = await shopPageFetch();
@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export const Shop = ({ heading, products }) => {
+const Shop = ({ heading, products }) => {
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
