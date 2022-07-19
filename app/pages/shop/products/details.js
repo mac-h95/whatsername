@@ -1,6 +1,8 @@
 import { loadStripe } from '@stripe/stripe-js';
 import NextHead from 'next/head';
+import { useContext } from 'react';
 import { urlFor } from 'sanity';
+import { CartContext } from '../context';
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -129,8 +131,12 @@ const DetailsPanel = ({
     'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
   );
 
-  const addItem = () => {};
+  const { addToCart } = useContext(CartContext);
 
+  const addItem = (e) => {
+    e.preventDefault();
+    addToCart(details);
+  };
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
       <Head
@@ -152,7 +158,7 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form action={() => addItem()}>
+      <form onSubmit={addItem}>
         <button
           disabled={in_stock ? false : true}
           className={`${
@@ -160,7 +166,7 @@ const DetailsPanel = ({
             'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
           } cursor-pointer disabled:hover:opacity-60 disabled:hover:bg-primary-500 disabled:active:opacity-60 disabled:active:bg-primary-500 disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
         >
-          Checkout Now
+          Add To Cart
         </button>
       </form>
     </div>
