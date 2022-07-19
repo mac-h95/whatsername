@@ -13,15 +13,15 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
-    localStorage.setItem('cart', JSON.stringify(cart));
+  const addToCart = async (product) => {
+    const newCart = [...cart, product];
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCart(newCart);
   };
 
   const removeFromCart = (slug) => {
     setCart((prevCart) => prevCart.filter((product) => product.slug !== slug));
     localStorage.setItem('cart', JSON.stringify(cart));
-    console.log(JSON.parse(localStorage.getItem('cart')));
   };
 
   return (

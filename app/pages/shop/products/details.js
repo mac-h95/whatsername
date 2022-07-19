@@ -117,6 +117,7 @@ const DetailsPanel = ({
   in_stock
 }) => {
   const details = {
+    id: useCart().cart.length + 1,
     slug: slug.current,
     name,
     quantity,
@@ -132,9 +133,9 @@ const DetailsPanel = ({
 
   const { addToCart } = useCart();
 
-  const addItem = (e) => {
+  const addItem = async (e) => {
     e.preventDefault();
-    addToCart(details);
+    await addToCart(details);
   };
 
   return (
