@@ -1,24 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export const CartContext = createContext();
 
-const cartReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      return [...state, action.payload];
-  }
-};
-
 export const CartProvider = ({ children }) => {
-  const initialState = [];
   const [cart, setCart] = useState([]);
-  const [state, dispatch] = useReducer(cartReducer, cart);
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
@@ -28,9 +13,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (cart !== initialState) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (product) => {
