@@ -1,8 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import NextHead from 'next/head';
-import { useContext } from 'react';
 import { urlFor } from 'sanity';
-import { CartContext } from '../context';
+import { useCart } from '../context';
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -131,12 +130,13 @@ const DetailsPanel = ({
     'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
   );
 
-  const { addToCart } = useContext(CartContext);
+  const { addToCart } = useCart();
 
   const addItem = (e) => {
     e.preventDefault();
     addToCart(details);
   };
+
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
       <Head

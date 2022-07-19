@@ -7,6 +7,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
+
     if (cartData) {
       setCart(cartData);
     }
@@ -14,7 +15,13 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
-    localtStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
+  const removeFromCart = (slug) => {
+    setCart((prevCart) => prevCart.filter((product) => product.slug !== slug));
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(JSON.parse(localStorage.getItem('cart')));
   };
 
   return (
@@ -22,7 +29,8 @@ export const CartProvider = ({ children }) => {
       value={{
         cart,
         setCart,
-        addToCart
+        addToCart,
+        removeFromCart
       }}
     >
       {children}
