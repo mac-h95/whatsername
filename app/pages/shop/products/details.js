@@ -25,12 +25,6 @@ const Details = ({ name, available_in, description }) => (
 );
 
 const Options = ({ options, selectedOptions, setSelectedOptions }) => {
-  console.log(
-    options.map((name, values) => {
-      name, values[0];
-    })
-  );
-
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
       {options.map((option) => (
@@ -40,25 +34,27 @@ const Options = ({ options, selectedOptions, setSelectedOptions }) => {
             <input
               type="text"
               className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-              onChange={(e) =>
-                setSelectedOptions({
-                  ...selectedOptions,
+              onChange={(e) => {
+                setSelectedOptions((previousState) => ({
+                  ...previousState,
                   [option.name]: e.target.value
-                })
-              }
+                }));
+              }}
             />
           ) : (
-            <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
+            <select
+              className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+              onChange={(e) => {
+                setSelectedOptions((previousState) => ({
+                  ...previousState,
+                  [option.name]: e.target.value
+                }));
+              }}
+            >
               {option.values.map((value) => (
                 <option
                   key={value}
                   className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-                  onChange={(e) =>
-                    setSelectedOptions({
-                      ...selectedOptions,
-                      [option.name]: value
-                    })
-                  }
                 >
                   {value}
                 </option>
@@ -120,16 +116,20 @@ const DetailsPanel = ({
   in_stock
 }) => {
   const details = {
-    slug,
+    slug: slug.current,
     name,
     quantity,
     options: selectedOptions,
-    total_price: sale_price ? quantity * sale_price : quantity * price
+    price: price,
+    sale_price: sale_price,
+    total_price: sale_price ? sale_price * quantity : price * quantity
   };
 
   const stripePromise = loadStripe(
     'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
   );
+
+  const addItem = () => {};
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -152,7 +152,7 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form>
+      <form action={() => addItem()}>
         <button
           disabled={in_stock ? false : true}
           className={`${
