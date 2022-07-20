@@ -6,7 +6,7 @@ import { useCart } from './context';
 const Navigation = () => {
   const router = useRouter();
   const { pathname } = router;
-
+  console.log(useCart().cart);
   return (
     <nav className="flex items-center justify-between w-screen px-6 mb-16 text-3xl md:px-16">
       {pathname === '/shop' ? (

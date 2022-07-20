@@ -15,7 +15,7 @@ const Cart = () => {
       <NextHead>
         <title>Cart | Whatsername</title>
       </NextHead>
-      <h1>Cart</h1>
+      <h1 className="-mt-52">Cart</h1>
       <Navigation />
       {cart.length > 0 ? (
         <>
@@ -35,9 +35,17 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-          <Link href="/shop/checkout">
-            <button className="mt-8 primary">Checkout</button>
-          </Link>
+          <div className="flex flex-col items-center mt-8 ">
+            <span className="text-2xl font-bold">
+              Total: £
+              {cart
+                .map((product) => product.total_price)
+                .reduce((a, b) => a + b, 0)}
+            </span>
+            <Link href="/shop/checkout">
+              <button className="primary">Checkout</button>
+            </Link>
+          </div>
         </>
       ) : (
         <div className="flex flex-col items-center space-y-2">

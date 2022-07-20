@@ -1,9 +1,11 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import NextHead from 'next/head';
 import LoadingSpinner from 'pages/utility/spinner';
 import { useEffect, useState } from 'react';
 
 import CheckoutForm from './checkout/form';
+import { useCart } from './context';
 import Navigation from './navigation';
 
 const stripePromise = loadStripe(
@@ -12,12 +14,13 @@ const stripePromise = loadStripe(
 
 export default function Checkout() {
   const [clientSecret, setClientSecret] = useState('');
+  const { cart } = useCart();
 
   useEffect(() => {
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: [{ id: 'xl-tshirt' }] })
+      body: JSON.stringify({ items: cart })
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -39,10 +42,18 @@ export default function Checkout() {
 
   return (
     <>
+      <NextHead>
+        <title>Checkout | Whatsername</title>
+      </NextHead>
       <Navigation />
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <span className="mb-12 text-2xl font-bold">Total: £140</span>
+          <span className="mb-12 text-2xl font-bold">
+            Total: £
+            {cart
+              .map((product) => product.total_price)
+              .reduce((a, b) => a + b, 0)}
+          </span>
           <CheckoutForm />
         </Elements>
       )}
