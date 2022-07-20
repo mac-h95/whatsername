@@ -4,6 +4,12 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [form, setForm] = useState({
+    shipping: true,
+    email: '',
+    name: '',
+    address: { line1: '', line2: '', city: '', postcode: '' }
+  });
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
@@ -32,7 +38,9 @@ export const CartProvider = ({ children }) => {
         cart,
         setCart,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        form,
+        setForm
       }}
     >
       {children}
