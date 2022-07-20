@@ -4,12 +4,7 @@ import Link from 'next/link';
 import Icon from 'icon';
 
 const Cart = () => {
-  const { cart, removeFromCart } = useCart();
-
-  const removeItem = (e) => {
-    e.preventDefault();
-    addToCart(details);
-  };
+  const { cart } = useCart();
 
   return (
     <>
@@ -23,7 +18,7 @@ const Cart = () => {
             <li className="flex items-center space-x-2">
               <h2>{product.name}</h2>
               <span>{product.quantity}</span>
-              <form onSubmit={(e) => removeItem()}>
+              <form>
                 <span className="cursor-pointer">
                   <Icon name="FiTrash" provider="fi" />
                 </span>

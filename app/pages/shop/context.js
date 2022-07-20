@@ -19,9 +19,10 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  const removeFromCart = (slug) => {
-    setCart((prevCart) => prevCart.filter((product) => product.slug !== slug));
-    localStorage.setItem('cart', JSON.stringify(cart));
+  const removeFromCart = (id) => {
+    const newCart = cart.filter((product) => product.id !== id);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCart(newCart);
   };
 
   return (
