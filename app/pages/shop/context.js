@@ -23,6 +23,7 @@ export const CartProvider = ({ children }) => {
     const newCart = cart.filter((product) => product.id !== id);
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
+    console.log(JSON.parse(localStorage.getItem('cart')));
   };
 
   return (
