@@ -124,9 +124,7 @@ const DetailsPanel = ({
     options: selectedOptions,
     price: price,
     sale_price: sale_price,
-    total_price: sale_price
-      ? parseInt(sale_price * quantity + '00')
-      : parseInt(price * quantity + '00')
+    total_price: sale_price ? sale_price * quantity : price * quantity
   };
 
   const stripePromise = loadStripe(

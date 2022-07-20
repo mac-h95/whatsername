@@ -1,14 +1,15 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const calculateOrderAmount = (items) => {
-  return items.reduce((item) => {
-    return item.total_price * 100;
-  });
+  return parseInt(
+    items.reduce((acc, item) => acc + item.total_price, 0) + '00'
+  );
 };
 
 export default async function handler(req, res) {
   const { items } = req.body;
-  console.log(items);
+
+  console.log(calculateOrderAmount(items));
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
