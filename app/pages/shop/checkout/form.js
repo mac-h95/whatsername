@@ -114,7 +114,7 @@ export default function CheckoutForm() {
                   className="checkout-input"
                   name="line1"
                   type="text"
-                  value={form.line1}
+                  value={form.address.line1}
                   onChange={(e) =>
                     updateForm({
                       address: { ...form.address, line1: e.target.value }

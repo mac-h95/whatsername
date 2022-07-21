@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { useState } from 'react';
 import NextHead from 'next/head';
 import { urlFor } from 'sanity';
 import { useCart } from '../context';
@@ -116,6 +117,8 @@ const DetailsPanel = ({
   setQuantity,
   in_stock
 }) => {
+  const [added, setAdded] = useState(false);
+
   const details = {
     id: useCart().cart.length + 1,
     slug: slug.current,
@@ -136,6 +139,7 @@ const DetailsPanel = ({
   const addItem = async (e) => {
     e.preventDefault();
     await addToCart(details);
+    await setAdded(true);
   };
 
   return (
@@ -167,7 +171,7 @@ const DetailsPanel = ({
             'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
           } cursor-pointer disabled:hover:opacity-60 disabled:hover:bg-primary-500 disabled:active:opacity-60 disabled:active:bg-primary-500 disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
         >
-          Add To Cart
+          {added ? 'Added' : 'Add To Cart'}
         </button>
       </form>
     </div>

@@ -10,6 +10,7 @@ const transporter = nodemailer.createTransport({
 
 const handler = async (req, res) => {
   const { cart, form } = req.body;
+
   const orderOptions = {
     from: process.env.EMAIL,
     to: process.env.EMAIL,
@@ -17,16 +18,18 @@ const handler = async (req, res) => {
     text: `
       ${form.name} has ordered the following:
       ${cart
-        .map(
-          (product) =>
-            `${product.name} - ${product.quantity} - ${JSON.stringify(
-              product.options
-            )}
-            )}`
-        )
+        .map((product) => {
+          const options = Object.entries(product.options).map(
+            ([k, v]) => `${k}: ${v}`
+          );
+          return `${product.name} - ${product.quantity} - ${options.join(
+            ', '
+          )}`;
+        })
         .join('\n')}
     `
   };
+  console.log(orderOptions);
 
   const customerOptions = {
     from: process.env.EMAIL,

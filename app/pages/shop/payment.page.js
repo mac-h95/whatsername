@@ -5,7 +5,7 @@ import NextHead from 'next/head';
 import { useEffect } from 'react';
 const Payment = () => {
   const router = useRouter();
-  const { setCart, setForm } = useCart;
+  const { setCart, setForm } = useCart();
 
   const paymentResult =
     router.query.redirect_status.charAt(0).toUpperCase() +
