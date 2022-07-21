@@ -1,40 +1,54 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export const CartContext = createContext();
 
-const cartReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      return [...state, action.payload];
-  }
-};
-
 export const CartProvider = ({ children }) => {
-  const initialState = [];
   const [cart, setCart] = useState([]);
-  const [state, dispatch] = useReducer(cartReducer, cart);
+  const [form, setForm] = useState({
+    shipping: true,
+    email: '',
+    name: '',
+    address: { line1: '', line2: '', city: '', postcode: '' }
+  });
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
+    const formData = JSON.parse(localStorage.getItem('form'));
     if (cartData) {
       setCart(cartData);
     }
+    if (formData) {
+      setForm(formData);
+    }
   }, []);
 
-  useEffect(() => {
-    if (cart !== initialState) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-  }, [cart]);
+  const addToCart = async (product) => {
+    const newCart = [...cart, product];
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCart(newCart);
+  };
 
-  const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+  const removeFromCart = (id) => {
+    const newCart = cart.filter((product) => product.id !== id);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCart(newCart);
+  };
+
+  const clearCart = () => {};
+
+  const updateForm = (data) => {
+    setForm({ ...form, ...data });
+    localStorage.setItem('form', JSON.stringify(form));
+  };
+
+  const clearForm = () => {
+    localStorage.removeItem('form');
+    setForm({
+      shipping: true,
+      email: '',
+      name: '',
+      address: { line1: '', line2: '', city: '', postcode: '' }
+    });
   };
 
   return (
@@ -42,7 +56,11 @@ export const CartProvider = ({ children }) => {
       value={{
         cart,
         setCart,
-        addToCart
+        addToCart,
+        removeFromCart,
+        form,
+        setForm,
+        updateForm
       }}
     >
       {children}

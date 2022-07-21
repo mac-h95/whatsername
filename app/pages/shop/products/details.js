@@ -1,6 +1,8 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { useState } from 'react';
 import NextHead from 'next/head';
 import { urlFor } from 'sanity';
+import { useCart } from '../context';
 
 const Head = ({ name, description, category, image }) => (
   <NextHead>
@@ -25,12 +27,6 @@ const Details = ({ name, available_in, description }) => (
 );
 
 const Options = ({ options, selectedOptions, setSelectedOptions }) => {
-  console.log(
-    options.map((name, values) => {
-      name, values[0];
-    })
-  );
-
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
       {options.map((option) => (
@@ -40,25 +36,27 @@ const Options = ({ options, selectedOptions, setSelectedOptions }) => {
             <input
               type="text"
               className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-              onChange={(e) =>
-                setSelectedOptions({
-                  ...selectedOptions,
+              onChange={(e) => {
+                setSelectedOptions((previousState) => ({
+                  ...previousState,
                   [option.name]: e.target.value
-                })
-              }
+                }));
+              }}
             />
           ) : (
-            <select className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500">
+            <select
+              className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
+              onChange={(e) => {
+                setSelectedOptions((previousState) => ({
+                  ...previousState,
+                  [option.name]: e.target.value
+                }));
+              }}
+            >
               {option.values.map((value) => (
                 <option
                   key={value}
                   className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-                  onChange={(e) =>
-                    setSelectedOptions({
-                      ...selectedOptions,
-                      [option.name]: value
-                    })
-                  }
                 >
                   {value}
                 </option>
@@ -119,17 +117,30 @@ const DetailsPanel = ({
   setQuantity,
   in_stock
 }) => {
+  const [added, setAdded] = useState(false);
+
   const details = {
-    slug,
+    id: useCart().cart.length + 1,
+    slug: slug.current,
     name,
     quantity,
     options: selectedOptions,
-    total_price: sale_price ? quantity * sale_price : quantity * price
+    price: price,
+    sale_price: sale_price,
+    total_price: sale_price ? sale_price * quantity : price * quantity
   };
 
   const stripePromise = loadStripe(
-    'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
+    'pk_live_51LC0NQE61EXQFmDyGXks8Ozy2pIcVepTL3GKwx9yMUhOhLk1rxZUj2EuXZmHTy8GLpTkPuCyO2asIbrpOPp5AhcL00zei3gFck'
   );
+
+  const { addToCart } = useCart();
+
+  const addItem = async (e) => {
+    e.preventDefault();
+    await addToCart(details);
+    await setAdded(true);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-6 text-center">
@@ -152,14 +163,7 @@ const DetailsPanel = ({
         in_stock={in_stock}
         quantity={quantity}
       />
-      <form
-        action={`/api/checkout-sessions/?name=${name}&description=${description}&image=${urlFor(
-          image
-        )}&quantity=${quantity}&price=${
-          sale_price ? sale_price : price
-        }&options=${options}`}
-        method="POST"
-      >
+      <form onSubmit={addItem}>
         <button
           disabled={in_stock ? false : true}
           className={`${
@@ -167,7 +171,7 @@ const DetailsPanel = ({
             'opacity-10 hover:bg-primary-500 hover:opacity-10 hover:cursor-not-allowed'
           } cursor-pointer disabled:hover:opacity-60 disabled:hover:bg-primary-500 disabled:active:opacity-60 disabled:active:bg-primary-500 disabled:border-gray-200 bg-primary-500 hover:opacity-60 text-background-500 border-primary-500`}
         >
-          Checkout Now
+          {added ? 'Added' : 'Add To Cart'}
         </button>
       </form>
     </div>

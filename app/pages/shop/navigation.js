@@ -6,7 +6,6 @@ import { useCart } from './context';
 const Navigation = () => {
   const router = useRouter();
   const { pathname } = router;
-  console.log(useCart().cart);
 
   return (
     <nav className="flex items-center justify-between w-screen px-6 mb-16 text-3xl md:px-16">
@@ -24,12 +23,16 @@ const Navigation = () => {
           </a>
         </Link>
       )}
-      <Link href="/shop/cart">
-        <a className="flex items-start space-x-2 text-2xl">
-          <Icon name="FiShoppingCart" provider="fi" />
-          <small>0</small>
-        </a>
-      </Link>
+      {pathname === '/shop/cart' ? (
+        <div className="flex-1" />
+      ) : (
+        <Link href="/shop/cart">
+          <a className="flex items-start space-x-2 text-2xl">
+            <Icon name="FiShoppingCart" provider="fi" />
+            <small>{useCart().cart.length}</small>
+          </a>
+        </Link>
+      )}
     </nav>
   );
 };

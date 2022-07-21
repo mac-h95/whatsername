@@ -9,43 +9,57 @@ const transporter = nodemailer.createTransport({
 });
 
 const handler = async (req, res) => {
-  const event = req.body;
+  const { cart, form } = req.body;
 
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      const mailOptions = {
-        from: process.env.EMAIL,
-        to: process.env.EMAIL,
-        subject: `New Order from Whatsername's Store`,
-        text: `
-          New Order from Whatsername's Store
-          Name: ${paymentIntent.shipping.name}
-          Email: ${paymentIntent.charges.data[0].billing_details.email}
-          Address: ${paymentIntent.shipping.address.line1},
-                   ${paymentIntent.shipping.address.line2}
-                   ${paymentIntent.shipping.address.city},
-                   ${paymentIntent.shipping.address.postal_code}
-          Order URL: ${paymentIntent.charges.data[0].receipt_url}
-        `
-      };
+  const orderOptions = {
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: `New order for ${form.name}`,
+    text: `
+      ${form.name} has ordered the following:
+      ${cart
+        .map((product) => {
+          const options = Object.entries(product.options).map(
+            ([k, v]) => `${k}: ${v}`
+          );
+          return `${product.name} - ${product.quantity} - ${options.join(
+            ', '
+          )}`;
+        })
+        .join('\n')}
+    `
+  };
 
-      transporter.sendMail(mailOptions, (err, data) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.status(200).end();
-        }
-      });
-      break;
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
-      console.log('PaymentMethod was attached to a Customer!');
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-      res.status(200).end();
-  }
+  const customerOptions = {
+    from: process.env.EMAIL,
+    to: form.email,
+    subject: `Your order from Whatsername`,
+    text: `
+      Thank you for your order, ${form.name}!
+      Your order will be delivered to you as soon as possible.
+      Your order contains the following:
+      ${cart
+        .map(
+          (product) =>
+            `${product.name} - ${product.quantity} - ${JSON.stringify(
+              product.options
+            )}
+            )}`
+        )
+        .join('\n')}
+
+        Total: £${cart
+          .map((product) => product.total_price)
+          .reduce((a, b) => a + b, 0)}
+
+          Shipping Address:
+          ${JSON.stringify(form.address)}
+    `
+  };
+
+  await transporter.sendMail(orderOptions);
+  await transporter.sendMail(customerOptions);
+  res.status(200).send('Success');
 };
 
 export default handler;
