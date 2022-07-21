@@ -5,14 +5,15 @@ import NextHead from 'next/head';
 import { useEffect } from 'react';
 const Payment = () => {
   const router = useRouter();
-  const { cart, form, clearCart, clearForm } = useCart();
-  console.log(cart, form);
+  const { setCart, setForm } = useCart;
 
   const paymentResult =
     router.query.redirect_status.charAt(0).toUpperCase() +
     router.query.redirect_status.slice(1);
 
   useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const form = JSON.parse(localStorage.getItem('form'));
     if (paymentResult === 'Succeeded') {
       fetch('/api/fulfill-order', {
         method: 'POST',
@@ -20,6 +21,18 @@ const Payment = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ cart, form })
+      }).then((res) => {
+        if (res.status === 200) {
+          localStorage.removeItem('cart');
+          setCart([]);
+          localStorage.removeItem('form');
+          setForm({
+            shipping: true,
+            email: '',
+            name: '',
+            address: { line1: '', line2: '', city: '', postcode: '' }
+          });
+        }
       });
     }
   }, [paymentResult]);

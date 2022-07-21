@@ -34,15 +34,11 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  const clearCart = () => {
-    localStorage.removeItem('cart');
-    setCart([]);
-  };
+  const clearCart = () => {};
 
   const updateForm = (data) => {
     setForm({ ...form, ...data });
     localStorage.setItem('form', JSON.stringify(form));
-
   };
 
   const clearForm = () => {
@@ -63,6 +59,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         form,
+        setForm,
         updateForm
       }}
     >

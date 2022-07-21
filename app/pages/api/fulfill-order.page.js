@@ -9,9 +9,8 @@ const transporter = nodemailer.createTransport({
 });
 
 const handler = async (req, res) => {
-  console.log(req.body);
   const { cart, form } = req.body;
-  const mailOptions = {
+  const orderOptions = {
     from: process.env.EMAIL,
     to: process.env.EMAIL,
     subject: `New order for ${form.name}`,
@@ -20,15 +19,45 @@ const handler = async (req, res) => {
       ${cart
         .map(
           (product) =>
-            `${product.name} - ${product.quantity} - ${product.options.map(
-              (option) => `${option.name}: ${option.value}`
+            `${product.name} - ${product.quantity} - ${JSON.stringify(
+              product.options
+            )}
             )}`
         )
         .join('\n')}
     `
   };
 
-  console.log(mailOptions);
+  const customerOptions = {
+    from: process.env.EMAIL,
+    to: form.email,
+    subject: `Your order from Whatsername`,
+    text: `
+      Thank you for your order, ${form.name}!
+      Your order will be delivered to you as soon as possible.
+      Your order contains the following:
+      ${cart
+        .map(
+          (product) =>
+            `${product.name} - ${product.quantity} - ${JSON.stringify(
+              product.options
+            )}
+            )}`
+        )
+        .join('\n')}
+
+        Total: £${cart
+          .map((product) => product.total_price)
+          .reduce((a, b) => a + b, 0)}
+
+          Shipping Address:
+          ${JSON.stringify(form.address)}
+    `
+  };
+
+  await transporter.sendMail(orderOptions);
+  await transporter.sendMail(customerOptions);
+  res.status(200).send('Success');
 };
 
 export default handler;
