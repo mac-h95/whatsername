@@ -33,7 +33,7 @@ const Product = ({
         <div className="flex flex-col items-center space-y-1">
           <h2 className="text-2xl font-bold">{name}</h2>
           <p>{available_in}</p>
-          <p className={`${!in_stock && 'text-red-500'}`}>
+          <div className={`${!in_stock && 'text-red-500'}`}>
             {in_stock ? (
               sale_price ? (
                 <div className="flex items-center space-x-2">
@@ -46,7 +46,7 @@ const Product = ({
             ) : (
               'Out of Stock'
             )}
-          </p>
+          </div>
         </div>
       </a>
     </Link>
