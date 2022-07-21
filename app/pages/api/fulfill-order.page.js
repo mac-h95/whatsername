@@ -29,7 +29,6 @@ const handler = async (req, res) => {
         .join('\n')}
     `
   };
-  console.log(orderOptions);
 
   const customerOptions = {
     from: process.env.EMAIL,

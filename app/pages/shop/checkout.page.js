@@ -9,7 +9,7 @@ import { useCart } from './context';
 import Navigation from './navigation';
 
 const stripePromise = loadStripe(
-  'pk_test_51LC0NQE61EXQFmDyWNXYF1ufvfp4JxNynFlx77zTaztuRTOkxqAyN3OZVRt9zNypaEZTrJyxKFqPrJY6STG4Fht200Go2kUpOQ'
+  'pk_live_51LC0NQE61EXQFmDyGXks8Ozy2pIcVepTL3GKwx9yMUhOhLk1rxZUj2EuXZmHTy8GLpTkPuCyO2asIbrpOPp5AhcL00zei3gFck'
 );
 [];
 export default function Checkout() {
