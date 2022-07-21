@@ -36,7 +36,12 @@ const Cart = () => {
             ))}
           </ul>
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-2xl font-bold ">Total: £</span>
+            <span className="text-2xl font-bold">
+              Total: £
+              {cart
+                .map((product) => product.total_price)
+                .reduce((a, b) => a + b, 0)}
+            </span>
             <Link href="/shop/checkout">
               <button className="primary">Checkout</button>
             </Link>

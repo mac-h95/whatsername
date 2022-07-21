@@ -27,7 +27,7 @@ const Form = () => {
         ...formInput
       })
     }).then((res) => {
-      console.log(res);
+
       res.status === 200
         ? (setMailSent('sent'),
           setFormInput({ name: '', email: '', subject: '', message: '' }))

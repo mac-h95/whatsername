@@ -9,7 +9,7 @@ const calculateOrderAmount = (items) => {
 export default async function handler(req, res) {
   const { items } = req.body;
 
-  console.log(calculateOrderAmount(items));
+
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),

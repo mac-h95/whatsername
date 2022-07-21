@@ -12,6 +12,7 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { form, updateForm } = useCart();
 
   useEffect(() => {
     if (!stripe) {
@@ -52,12 +53,11 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
-
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://localhost:3000/shop/payment',
-        receipt_email: useCart.form.email
+        return_url: `${window.location.origin}/shop/payment`,
+        receipt_email: form.email
       }
     });
 
@@ -69,8 +69,6 @@ export default function CheckoutForm() {
 
     setIsLoading(false);
   };
-
-  const { form, setForm } = useCart();
 
   return (
     <>
@@ -87,7 +85,7 @@ export default function CheckoutForm() {
                 name="name"
                 type="text"
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) => updateForm({ name: e.target.value })}
                 placeholder="Your name"
               />
             </div>
@@ -100,7 +98,7 @@ export default function CheckoutForm() {
                 name="email"
                 type="text"
                 value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                onChange={(e) => updateForm({ email: e.target.value })}
                 placeholder="name@mail.com"
               />
             </div>
@@ -118,8 +116,7 @@ export default function CheckoutForm() {
                   type="text"
                   value={form.line1}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
+                    updateForm({
                       address: { ...form.address, line1: e.target.value }
                     })
                   }
@@ -135,8 +132,7 @@ export default function CheckoutForm() {
                   type="text"
                   value={form.address.line2}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
+                    updateForm({
                       address: { ...form.address, line2: e.target.value }
                     })
                   }
@@ -154,8 +150,7 @@ export default function CheckoutForm() {
                   type="text"
                   value={form.address.city}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
+                    updateForm({
                       address: { ...form.address, city: e.target.value }
                     })
                   }
@@ -171,8 +166,7 @@ export default function CheckoutForm() {
                   type="text"
                   value={form.address.postcode}
                   onChange={(e) =>
-                    setForm({
-                      ...form,
+                    updateForm({
                       address: { ...form.address, postcode: e.target.value }
                     })
                   }
@@ -182,7 +176,7 @@ export default function CheckoutForm() {
           </div>
           <button
             className="primary"
-            onClick={() => setForm({ ...form, shipping: false })}
+            onClick={() => updateForm({ shipping: false })}
           >
             Next
           </button>

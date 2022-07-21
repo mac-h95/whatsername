@@ -13,9 +13,12 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
-
+    const formData = JSON.parse(localStorage.getItem('form'));
     if (cartData) {
       setCart(cartData);
+    }
+    if (formData) {
+      setForm(formData);
     }
   }, []);
 
@@ -29,7 +32,27 @@ export const CartProvider = ({ children }) => {
     const newCart = cart.filter((product) => product.id !== id);
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
-    console.log(JSON.parse(localStorage.getItem('cart')));
+  };
+
+  const clearCart = () => {
+    localStorage.removeItem('cart');
+    setCart([]);
+  };
+
+  const updateForm = (data) => {
+    setForm({ ...form, ...data });
+    localStorage.setItem('form', JSON.stringify(form));
+
+  };
+
+  const clearForm = () => {
+    localStorage.removeItem('form');
+    setForm({
+      shipping: true,
+      email: '',
+      name: '',
+      address: { line1: '', line2: '', city: '', postcode: '' }
+    });
   };
 
   return (
@@ -40,7 +63,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         form,
-        setForm
+        updateForm
       }}
     >
       {children}
