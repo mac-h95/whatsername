@@ -5,7 +5,6 @@ const BodyText = ({ value }) => {
   const components = {
     marks: {
       internalLink: ({ children, value }) => {
-
         return (
           <Link href={`/blog/posts/`}>
             <a className="text-foreground-500 hover:text-primary-500">

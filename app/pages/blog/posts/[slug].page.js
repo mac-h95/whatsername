@@ -18,12 +18,15 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-const Post = ({ post }) => (
-  <>
-    <Header {...post} />
-    <BodyText value={post.body} />
-    <Author {...post.author} />
-  </>
-);
+const Post = ({ post }) => {
+  console.log(post);
+  return (
+    <>
+      <Header {...post} />
+      <BodyText value={post.body} />
+      <Author {...post.author} />
+    </>
+  );
+};
 
 export default Post;

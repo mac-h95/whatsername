@@ -42,7 +42,7 @@ export async function postPageFetch(slug) {
       },
       date,
       cover{asset{_ref}},
-      body[]->,
+      body[],
       author->{
         name,
         link,
