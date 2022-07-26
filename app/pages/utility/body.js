@@ -6,7 +6,7 @@ const BodyText = ({ value }) => {
     marks: {
       internalLink: ({ children, value }) => {
         return (
-          <Link href={`/blog/posts/`}>
+          <Link href={`/blog/posts/${value.reference.slug.current}`}>
             <a className="text-foreground-500 hover:text-primary-500">
               {children}
             </a>

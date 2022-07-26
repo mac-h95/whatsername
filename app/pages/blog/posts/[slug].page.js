@@ -19,7 +19,6 @@ export const getStaticProps = async ({ params }) => {
 };
 
 const Post = ({ post }) => {
-  console.log(post);
   return (
     <>
       <Header {...post} />
