@@ -5,6 +5,9 @@ import { urlFor } from 'sanity';
 
 const Hero = ({ cover, artist, venue, date }) => (
   <div className="grid w-screen min-h-screen place-items-center">
+    <NextHead>
+      <title>{`${artist} - ${venue} - ${date} | Whatsername`}</title>
+    </NextHead>
     <Image src={urlFor(cover)} alt={artist} layout="fill" objectFit="cover" />
     <div className="z-40 flex flex-col items-center pb-64 ">
       <h1 className="font-bold tracking-widest md:text-8xl">{artist}</h1>

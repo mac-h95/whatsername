@@ -1,5 +1,4 @@
 import { urlFor } from 'sanity';
-import Image from 'next/image';
 import Photographer from './photographer';
 import checkPhotographers from './sort-photogtaphers';
 
@@ -20,9 +19,12 @@ export default function PhotoList({ images }) {
                   (image) => image.photographer.name === photographer.name
                 )
                 .map((image) => (
-                  <span className="mt-2 md:mt-0" key={image.caption}>
-                    <Image src={urlFor(image.image)} alt={image.caption} />
-                  </span>
+                  <img
+                    className="mt-2 md:mt-0"
+                    key={image.caption}
+                    src={urlFor(image.image)}
+                    alt={image.caption}
+                  />
                 ))}
             </div>
           </div>
