@@ -77,7 +77,7 @@ export default function CheckoutForm() {
           <span className="font-bold">Personal</span>
           <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
             <div className="flex flex-col items-start w-full">
-              <label for="name" className="normal-case">
+              <label htmlFor="name" className="normal-case">
                 Name
               </label>
               <input
@@ -90,7 +90,7 @@ export default function CheckoutForm() {
               />
             </div>
             <div className="flex flex-col items-start w-full">
-              <label for="email" className="normal-case">
+              <label htmlFor="email" className="normal-case">
                 Email Address
               </label>
               <input
@@ -107,7 +107,7 @@ export default function CheckoutForm() {
           <div className="flex flex-col items-center space-y-2">
             <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
               <div className="flex flex-col items-start w-full">
-                <label for="line1" className="normal-case">
+                <label htmlFor="line1" className="normal-case">
                   Line 1
                 </label>
                 <input
@@ -123,7 +123,7 @@ export default function CheckoutForm() {
                 />
               </div>
               <div className="flex flex-col items-start w-full">
-                <label for="line2" className="normal-case">
+                <label htmlFor="line2" className="normal-case">
                   Line 2
                 </label>
                 <input
@@ -141,7 +141,7 @@ export default function CheckoutForm() {
             </div>
             <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
               <div className="flex flex-col items-start w-full">
-                <label for="city" className="normal-case">
+                <label htmlFor="city" className="normal-case">
                   City
                 </label>
                 <input
@@ -157,7 +157,7 @@ export default function CheckoutForm() {
                 />
               </div>
               <div className="flex flex-col items-start w-full">
-                <label for="postcode" className="normal-case">
+                <label htmlFor="postcode" className="normal-case">
                   Post Code
                 </label>
                 <input

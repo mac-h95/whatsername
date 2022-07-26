@@ -26,7 +26,7 @@ const Details = ({ name, available_in, description }) => (
   </>
 );
 
-const Options = ({ options, selectedOptions, setSelectedOptions }) => {
+const Options = ({ options, setSelectedOptions }) => {
   return (
     <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
       {options.map((option) => (

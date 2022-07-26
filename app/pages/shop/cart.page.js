@@ -5,7 +5,7 @@ import Icon from 'icon';
 import Navigation from './navigation';
 
 const Cart = () => {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart, updateItemQuantity } = useCart();
 
   const removeItem = (id) => {
     removeFromCart(id);
@@ -28,9 +28,34 @@ const Cart = () => {
                 <Link href={`/shop/products/${product.slug}`}>
                   <h2 className="font-bold cursor-pointer">{product.name}</h2>
                 </Link>
-                <span>{product.quantity}</span>
+                <div className="flex items-center space-x-2">
+                  <span
+                    onClick={() =>
+                      updateItemQuantity(product.id, product.quantity - 1)
+                    }
+                    className="quantity"
+                  >
+                    -
+                  </span>
+                  <input
+                    className="w-10 h-10 p-0 text-center bg-transparent border-2 border-foreground-500"
+                    type="number"
+                    value={product.quantity}
+                    onChange={(e) =>
+                      updateItemQuantity(product.id, e.target.value)
+                    }
+                  />
+                  <span
+                    onClick={() =>
+                      updateItemQuantity(product.id, product.quantity + 1)
+                    }
+                    className="quantity"
+                  >
+                    +
+                  </span>
+                </div>
                 <span
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:text-red-500"
                   onClick={(e) => (e.preventDefault(), removeItem(product.id))}
                 >
                   <Icon name="FiTrash" provider="fi" />

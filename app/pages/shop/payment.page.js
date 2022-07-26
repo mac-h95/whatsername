@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useCart } from './context';
 import NextHead from 'next/head';
 import { useEffect } from 'react';
+
 const Payment = () => {
   const router = useRouter();
   const { setCart, setForm } = useCart();
