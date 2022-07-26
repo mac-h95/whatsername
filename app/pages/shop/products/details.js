@@ -26,7 +26,6 @@ const Details = ({ name, available_in, description }) => (
   </>
 );
 
-<<<<<<< HEAD
 const Options = ({ options, selectedOptions, setSelectedOptions }) => (
   <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
     {options.map((option) => (
@@ -65,50 +64,6 @@ const Options = ({ options, selectedOptions, setSelectedOptions }) => (
     ))}
   </div>
 );
-=======
-const Options = ({ options, setSelectedOptions }) => {
-  return (
-    <div className="flex flex-col items-center justify-center max-w-sm space-y-8 text-center ">
-      {options.map((option) => (
-        <div key={option.name}>
-          <label className="block text-sm font-bold">{option.name}</label>
-          {option.values[0] === 'custom' ? (
-            <input
-              type="text"
-              className="w-4/5 bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-              onChange={(e) => {
-                setSelectedOptions((previousState) => ({
-                  ...previousState,
-                  [option.name]: e.target.value
-                }));
-              }}
-            />
-          ) : (
-            <select
-              className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-              onChange={(e) => {
-                setSelectedOptions((previousState) => ({
-                  ...previousState,
-                  [option.name]: e.target.value
-                }));
-              }}
-            >
-              {option.values.map((value) => (
-                <option
-                  key={value}
-                  className="w-full bg-transparent border-0 border-b-2 focus:ring-0 focus:outline-0 border-foreground-500"
-                >
-                  {value}
-                </option>
-              ))}
-            </select>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
->>>>>>> bddf39a25551122fe609dc597f11be3dc7a718fd
 
 const Quantity = ({ quantity, setQuantity }) => (
   <div className="flex items-center justify-center mx-auto space-x-4">
