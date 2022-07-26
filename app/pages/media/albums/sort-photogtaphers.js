@@ -1,4 +1,4 @@
-export default (images) => {
+const checkPhotographers = (images) => {
   const clickies = images.map((image) => image.photographer);
   let newArr = [];
   let uniObj = [];
@@ -24,3 +24,5 @@ export default (images) => {
 
   return newArr;
 };
+
+export default checkPhotographers;

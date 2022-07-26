@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
 const Product = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  
   return (
     <>
       <Navigation />

@@ -46,7 +46,11 @@ export async function postPageFetch(slug) {
         ...,
         markDefs[] {
           ...,
+<<<<<<< HEAD
           reference->
+=======
+          reference->{slug}
+>>>>>>> bddf39a25551122fe609dc597f11be3dc7a718fd
         }
       },
       author->{

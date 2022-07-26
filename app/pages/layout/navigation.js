@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { onClickOutside } from 'pages/utility/click';
+import { useOnClickOutside } from 'pages/utility/click';
 import { useRef } from 'react';
 
 const Item = ({ href, name, route, nounderline, setVisible }) => {
@@ -54,7 +54,7 @@ const NavigationItems = [
 
 const Navigation = ({ route, visible, setVisible, nounderline }) => {
   const navRef = useRef();
-  onClickOutside(navRef, () => setVisible(false));
+  useOnClickOutside(navRef, () => setVisible(false));
   return (
     <nav
       ref={navRef}
