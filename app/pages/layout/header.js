@@ -19,7 +19,7 @@ const Header = ({ logo, route }) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  });
+  }, []);
 
   return (
     <header className="flex items-center justify-between w-screen px-6 py-2 mb-3 md:py-6 md:px-10">

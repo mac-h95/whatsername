@@ -34,21 +34,22 @@ export const CartProvider = ({ children }) => {
     setCart(newCart);
   };
 
-  const clearCart = () => {};
+  const updateItemQuantity = (id, quantity) => {
+    const newCart = cart.map((product) => {
+      if (product.id === id) {
+        product.quantity = quantity;
+        product.total_price = product.price * quantity;
+      }
+      return product;
+    });
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCart(newCart);
+    console.log(newCart);
+  };
 
   const updateForm = (data) => {
     setForm({ ...form, ...data });
     localStorage.setItem('form', JSON.stringify(form));
-  };
-
-  const clearForm = () => {
-    localStorage.removeItem('form');
-    setForm({
-      shipping: true,
-      email: '',
-      name: '',
-      address: { line1: '', line2: '', city: '', postcode: '' }
-    });
   };
 
   return (
@@ -58,6 +59,7 @@ export const CartProvider = ({ children }) => {
         setCart,
         addToCart,
         removeFromCart,
+        updateItemQuantity,
         form,
         setForm,
         updateForm
