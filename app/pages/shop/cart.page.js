@@ -21,7 +21,10 @@ const Cart = () => {
         <>
           <ul className="flex flex-col items-start mt-2 space-y-4">
             {cart.map((product, i) => (
-              <li key={i} className="flex items-center justify-start space-x-8">
+              <li
+                key={i}
+                className="flex items-center justify-start px-6 py-2 space-x-8 border-b border-gray-30"
+              >
                 <Link href={`/shop/products/${product.slug}`}>
                   <h2 className="font-bold cursor-pointer">{product.name}</h2>
                 </Link>
@@ -35,7 +38,7 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-          <div className="flex flex-col items-center space-y-2">
+          <div className="flex flex-col items-center mt-8 space-y-2">
             <span className="text-2xl font-bold">
               Total: £
               {cart

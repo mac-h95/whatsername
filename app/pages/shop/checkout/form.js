@@ -75,7 +75,7 @@ export default function CheckoutForm() {
       {form.shipping ? (
         <form className="flex flex-col items-center space-y-4">
           <span className="font-bold">Personal</span>
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
             <div className="flex flex-col items-start w-full">
               <label for="name" className="normal-case">
                 Name
@@ -105,7 +105,7 @@ export default function CheckoutForm() {
           </div>
           <span className="font-bold">Address</span>
           <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-start space-x-2">
+            <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
               <div className="flex flex-col items-start w-full">
                 <label for="line1" className="normal-case">
                   Line 1
@@ -139,7 +139,7 @@ export default function CheckoutForm() {
                 />
               </div>
             </div>
-            <div className="flex items-start space-x-2">
+            <div className="flex flex-col items-center space-y-2 md:space-x-2 md:space-y-0 md:flex-row">
               <div className="flex flex-col items-start w-full">
                 <label for="city" className="normal-case">
                   City
