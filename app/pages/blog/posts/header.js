@@ -7,7 +7,7 @@ import { urlFor } from 'sanity';
 
 const MetaData = ({ title, metadata }) => (
   <NextHead>
-    <title>{title}</title>
+    <title>{title + ' | Whatsername'}</title>
     <meta name="title" content={title} />
     <meta name="description" content={metadata.description}></meta>
     <meta name="keywords" content={metadata.keywords}></meta>
