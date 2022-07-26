@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useOClickOutside } from 'pages/utility/click';
+import { useOnClickOutside } from 'pages/utility/click';
 import { useRef } from 'react';
 
 const Item = ({ href, name, route, nounderline, setVisible }) => {

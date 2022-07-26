@@ -36,7 +36,7 @@ const Payment = () => {
         }
       });
     }
-  }, [paymentResult]);
+  }, [paymentResult, setCart, setForm]);
 
   return (
     <>
