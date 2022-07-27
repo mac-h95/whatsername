@@ -18,10 +18,10 @@ const Featured = ({ slug, cover, title, snippet, date }) => (
             <Icon name="FiCalendar" provider="fi" />
             <span>{getDateString(date)}</span>
           </span>
-          <span className="flex items-center space-x-1 lowercase">
+         {/* <span className="flex items-center space-x-1 lowercase">
             <Icon name="FiClock" provider="fi" />
             <span>5min</span>
-          </span>
+          </span> */}
         </span>
       </div>
     </a>
