@@ -48,7 +48,7 @@ const Header = ({ title, metadata, cover, date }) => (
              {/* <span className="flex items-center space-x-1 lowercase">
                 <Icon name="FiClock" provider="fi" />
                 <span>5min</span>
-              </span> *\}
+              </span> */}
             </span>
           </div>
         </div>
