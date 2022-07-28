@@ -1,15 +1,15 @@
-import { useCart } from './context';
-import NextHead from 'next/head';
-import Link from 'next/link';
-import Icon from 'icon';
-import Navigation from './navigation';
+import { useCart } from './context'
+import NextHead from 'next/head'
+import Link from 'next/link'
+import Icon from 'icon'
+import Navigation from './navigation'
 
 const Cart = () => {
-  const { cart, removeFromCart, updateItemQuantity } = useCart();
+  const { cart, removeFromCart, updateItemQuantity } = useCart()
 
   const removeItem = (id) => {
-    removeFromCart(id);
-  };
+    removeFromCart(id)
+  }
   return (
     <>
       <NextHead>
@@ -67,7 +67,11 @@ const Cart = () => {
             <span className="text-2xl font-bold">
               Total: £
               {cart
-                .map((product) => product.total_price)
+                .map((product) =>
+                  product.sale_price
+                    ? product.quantity * product.sale_price
+                    : product.quantity * product.price
+                )
                 .reduce((a, b) => a + b, 0)}
             </span>
             <Link href="/shop/checkout">
@@ -84,7 +88,7 @@ const Cart = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart
